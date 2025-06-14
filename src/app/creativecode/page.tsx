@@ -10,6 +10,12 @@ import { Environment, OrbitControls, Stats } from '@react-three/drei'
 import { ReactThreeFiber } from '@react-three/fiber'
 import { VideoTex } from './_ui/VideoTex'
 
+import studio from '@theatre/studio'
+
+if (process.env.NODE_ENV === 'development') {
+  studio.initialize()
+}
+
 extend({ ...(THREE as {}) })
 
 declare global {
@@ -26,10 +32,10 @@ function Scene() {
     st.gl.render(st.scene, st.camera)
   }, 1)
 
-  const uniformGroup = useMemo(() => {
+  const uni = useMemo(() => {
     return {
-      frequencyX: uniform(5),
-      frequencyY: uniform(5),
+      frequencyX: uniform(10),
+      frequencyY: uniform(10),
     }
   }, [])
 
@@ -40,9 +46,9 @@ function Scene() {
 
     // vertex
     const modelPosition = modelWorldMatrix.mul(vec4(positionLocal, 1))
-    const elevation = sin(modelPosition.x.mul(uniformGroup.frequencyX).sub(time))
+    const elevation = sin(modelPosition.x.mul(uni.frequencyX).sub(time))
       .mul(0.1)
-      .add(sin(modelPosition.z.mul(uniformGroup.frequencyY).sub(time)).mul(0.1))
+      .add(sin(modelPosition.z.mul(uni.frequencyY).sub(time)).mul(0.1))
 
     material.positionNode = positionLocal.add(vec3(0, 0, elevation))
     material.normalNode = positionLocal.add(vec3(0, 0, elevation)).normalize()
@@ -59,17 +65,17 @@ function Scene() {
     ).add(texture(tex))
 
     return material
-  }, [uniformGroup])
+  }, [uni])
 
-  useControls({
-    frequency: {
-      value: [20, 20],
-      onChange: (value: [number, number]) => {
-        uniformGroup.frequencyX.value = value[0]
-        uniformGroup.frequencyY.value = value[1]
-      },
-    },
-  })
+  // useControls({
+  //   frequency: {
+  //     value: [20, 20],
+  //     onChange: (value: [number, number]) => {
+  //       uni.frequencyX.value = value[0]
+  //       uni.frequencyY.value = value[1]
+  //     },
+  //   },
+  // })
 
   //
 
@@ -83,33 +89,35 @@ function Scene() {
   )
 }
 
+// FlyPlaneSheet
+
 export default function Page() {
   //
 
   //
   return (
     <div className='w-full h-full'>
-      <Canvas
-        gl={async (st: any) => {
-          const renderer = new WebGPURenderer({
-            canvas: st.canvas as HTMLCanvasElement,
-          })
+      <Suspense fallback={null}>
+        <Canvas
+          gl={async (st: any) => {
+            const renderer = new WebGPURenderer({
+              canvas: st.canvas as HTMLCanvasElement,
+            })
 
-          let body = document.querySelector('body')
-          renderer.setSize(body?.clientWidth || 1, body?.clientHeight || 1)
-          renderer.setPixelRatio(window.devicePixelRatio || 1)
+            let body = document.querySelector('body')
+            renderer.setSize(body?.clientWidth || 1, body?.clientHeight || 1)
+            renderer.setPixelRatio(window.devicePixelRatio || 1)
 
-          await renderer.init()
-          return renderer
-        }}
-      >
-        <Suspense fallback={null}>
+            await renderer.init()
+            return renderer
+          }}
+        >
           <Environment files={[`/hdr/brown_photostudio_02_1k.hdr`]}></Environment>
           <Scene />
-        </Suspense>
-        <OrbitControls></OrbitControls>
-        <Stats></Stats>
-      </Canvas>
+          <OrbitControls></OrbitControls>
+          <Stats></Stats>
+        </Canvas>
+      </Suspense>
     </div>
   )
 }
