@@ -1,0 +1,25 @@
+{
+  "sheetsById": {
+    "FlyPlaneSheet": {
+      "staticOverrides": {
+        "byObject": {
+          "flying1": {
+            "color": {
+              "r": 1,
+              "g": 0.13333333333333333,
+              "b": 0.13333333333333333,
+              "a": 1
+            },
+            "frequencyX": 31,
+            "frequencyY": -2,
+            "metalness": 1.5316455696202522
+          }
+        }
+      }
+    }
+  },
+  "definitionVersion": "0.4.0",
+  "revisionHistory": [
+    "srH2OXUp6QDJAb-Z"
+  ]
+}

@@ -29,6 +29,9 @@ importers:
       next:
         specifier: 15.3.3
         version: 15.3.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      r3f:
+        specifier: link:@types/@theatre/r3f
+        version: link:@types/@theatre/r3f
       react:
         specifier: ^19.0.0
         version: 19.1.0
