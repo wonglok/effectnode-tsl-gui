@@ -1,7 +1,8 @@
 import { getProject } from '@theatre/core'
 // import statev001 from './'
 import state001 from './HomeProject/HomeProject.theatre-project-state.json'
-let config: any = {
+
+const config: any = {
   state: false,
 }
 

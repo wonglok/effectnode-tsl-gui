@@ -3,7 +3,7 @@
 import { Canvas, useFrame, extend } from '@react-three/fiber'
 import { Suspense, useEffect, useMemo } from 'react'
 import { WebGPURenderer } from 'three/webgpu'
-import { mix, modelWorldMatrix, positionLocal, sin, time, uniform, uv, vec3, vec4 } from 'three/tsl'
+import { cos, mix, modelWorldMatrix, positionLocal, sin, time, uniform, uv, vec3, vec4 } from 'three/tsl'
 import { Environment, OrbitControls, Stats } from '@react-three/drei'
 import * as THREE from 'three/webgpu'
 
@@ -24,40 +24,45 @@ function Scene() {
   }, 1)
 
   const uni = useMemo(() => {
+    const color1 = uniform(new THREE.Color('#ff0000'))
+    const color2 = uniform(new THREE.Color('#0000ff'))
+
     return {
       //
+      size: uniform(1.0),
+      color1: color1,
+      color2: color2,
+
       frequencyX: uniform(10),
       frequencyY: uniform(10),
     }
   }, [])
 
-  const customMaterial = useMemo(() => {
+  const { material } = useMemo(() => {
     const material = new THREE.MeshPhysicalNodeMaterial({
       side: THREE.DoubleSide,
     })
 
-    const modelPosition = modelWorldMatrix.mul(vec4(positionLocal, 1))
-    const elevation = sin(modelPosition.x.mul(uni.frequencyX).sub(time))
-      .mul(0.1)
-      .add(sin(modelPosition.z.mul(uni.frequencyY).sub(time)).mul(0.1))
+    const modelPosition = vec4(positionLocal, 1)
 
-    material.positionNode = positionLocal.add(vec3(0, 0, elevation))
-    material.normalNode = positionLocal.add(vec3(0, elevation, 0)).normalize()
+    const xBand = sin(modelPosition.x.mul(uni.frequencyX).sub(time)).mul(0.1)
+    const yBand = sin(modelPosition.y.mul(uni.frequencyY).sub(time)).mul(0.1)
+    const elevation = xBand.add(yBand)
 
-    const color1 = vec3(uv(), 1.0)
-
-    const color2 = vec3(1.0, uv())
+    material.positionNode = positionLocal.add(vec3(0, 0, elevation.mul(uni.size)))
+    material.normalNode = positionLocal.normalize()
 
     material.colorNode = mix(
-      color1,
-      color2,
-      sin(time.add(elevation.mul(25)))
+      uni.color1,
+      uni.color2,
+      sin(time.mul(elevation).mul(uv().x.mul(2).sub(1)).mul(uv().y.mul(2).sub(1)))
+        .mul(cos(time.mul(elevation).mul(uv().x.mul(2).sub(1)).mul(uv().y.mul(2).sub(1))))
         .mul(0.5)
         .add(0.5),
     )
 
-    return material
-  }, [uni])
+    return { material }
+  }, [])
 
   //
   useEffect(() => {
@@ -74,6 +79,9 @@ function Scene() {
         metalness: types.number(0, {
           range: [0, 2],
         }),
+        size: types.number(1, {
+          range: [0, 5],
+        }),
       },
       {
         reconfigure: true,
@@ -86,7 +94,13 @@ function Scene() {
       uni.frequencyX.value = values.frequencyX
       uni.frequencyY.value = values.frequencyY
 
-      customMaterial.metalness = values.metalness
+      uni.color1.value.setRGB(values.colorA.r, values.colorA.g, values.colorA.b)
+      uni.color2.value.setRGB(values.colorB.r, values.colorB.g, values.colorB.b)
+
+      uni.size.value = values.size
+
+      material.metalness = values.metalness
+
       //
     })
   }, [uni])
@@ -105,8 +119,8 @@ function Scene() {
 
   return (
     <>
-      <mesh material={customMaterial} rotation-x={-Math.PI * 0.5}>
-        <planeGeometry args={[1, 1, 128, 128]} />
+      <mesh material={material} rotation={[-0.5 * Math.PI, 0, 0]}>
+        <planeGeometry args={[2, 2, 256, 256]} />
       </mesh>
     </>
   )
@@ -136,7 +150,7 @@ export default function Page() {
         <Suspense fallback={null}>
           <Environment files={[`/hdr/brown_photostudio_02_1k.hdr`]}></Environment>
           <Scene />
-          <OrbitControls object-position={[0, 2.5, 5]}></OrbitControls>
+          <OrbitControls object-position={[0, 1.5, 2.5]}></OrbitControls>
           <Stats></Stats>
         </Suspense>
         {/*  */}
