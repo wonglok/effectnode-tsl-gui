@@ -52,11 +52,7 @@ function Scene() {
     material.positionNode = positionLocal.add(vec3(0, 0, elevation.mul(uni.size)))
     material.normalNode = positionLocal.normalize()
 
-    material.colorNode = mix(
-      uni.color1,
-      uni.color2,
-      sin(time.mul(elevation.mul(0.1))).mul(cos(time.mul(elevation.mul(0.1)))),
-    )
+    material.colorNode = mix(uni.color1, uni.color2, sin(elevation).mul(cos(elevation)).mul(uni.size).mul(0.5).add(0.5))
 
     return { material }
   }, [])
