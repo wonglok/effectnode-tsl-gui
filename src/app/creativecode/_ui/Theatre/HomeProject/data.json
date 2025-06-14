@@ -12,29 +12,29 @@
             },
             "frequencyX": 2,
             "frequencyY": 1,
-            "metalness": 0.8101265822784813,
+            "metalness": 0.1962025316455701,
             "colorA": {
-              "r": 0.2901960784313726,
+              "r": 1,
               "g": 1,
-              "b": 0.11372549019607843,
-              "a": 1
-            },
-            "colorB": {
-              "r": 0.6392156862745098,
-              "g": 0.6392156862745098,
               "b": 1,
               "a": 1
             },
-            "size": 3.0063291139240556,
+            "colorB": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "size": 1.0759493670886124,
             "scale": {
               "y": 1
             },
-            "roughness": 0.45569620253164567
+            "roughness": 1
           }
         }
       }
     }
   },
   "definitionVersion": "0.4.0",
-  "revisionHistory": ["2SZNW-mscWA9e_SE", "kiUSoBejDoMnNTId", "srH2OXUp6QDJAb-Z"]
+  "revisionHistory": ["vBKIoi-umCNmb16L", "2SZNW-mscWA9e_SE", "kiUSoBejDoMnNTId", "srH2OXUp6QDJAb-Z"]
 }
