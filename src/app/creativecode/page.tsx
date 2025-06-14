@@ -1,7 +1,7 @@
 'use client'
 
 import { Canvas, useFrame, extend } from '@react-three/fiber'
-import { Suspense, useMemo } from 'react'
+import { Suspense, useEffect, useMemo } from 'react'
 import { MeshStandardNodeMaterial, WebGPURenderer } from 'three/webgpu'
 import { mix, modelWorldMatrix, positionLocal, sin, time, uniform, uv, vec3, vec4 } from 'three/tsl'
 import { Environment, OrbitControls, Stats } from '@react-three/drei'
@@ -9,6 +9,8 @@ import { ReactThreeFiber } from '@react-three/fiber'
 import * as THREE from 'three/webgpu'
 
 import studio from '@theatre/studio'
+import { FlyPlaneSheet } from './_ui/Theatre/FlyPlaneSheet'
+import { types } from '@theatre/core'
 
 if (process.env.NODE_ENV === 'development') {
   studio.initialize()
@@ -47,7 +49,7 @@ function Scene() {
       .add(sin(modelPosition.z.mul(uni.frequencyY).sub(time)).mul(0.1))
 
     material.positionNode = positionLocal.add(vec3(0, 0, elevation))
-    material.normalNode = positionLocal.add(vec3(0, 0, elevation)).normalize()
+    material.normalNode = positionLocal.add(vec3(0, elevation, 0)).normalize()
 
     const color1 = vec3(uv(), 1.0)
 
@@ -62,6 +64,42 @@ function Scene() {
     )
 
     return material
+  }, [uni])
+
+  //
+  useEffect(() => {
+    let box1 = FlyPlaneSheet.object('flying1', {
+      position: { x: 0, y: 0, z: 0 },
+      rotation: { x: 0, y: 0, z: 0 },
+      scale: { x: 1, y: 1, z: 1 },
+      colorA: types.rgba(
+        { ...new THREE.Color('#ff0000'), a: 1 },
+        {
+          //
+        },
+      ),
+      colorB: types.rgba(
+        { ...new THREE.Color('#0000ff'), a: 1 },
+        {
+          //
+        },
+      ),
+      frequencyX: 10,
+      frequencyY: 10,
+      metalness: types.number(0, {
+        range: [0, 2],
+      }),
+    })
+
+    return box1.onValuesChange((values) => {
+      //
+
+      uni.frequencyX.value = values.frequencyX
+      uni.frequencyY.value = values.frequencyY
+
+      customMaterial.metalness = values.metalness
+      //
+    })
   }, [uni])
 
   // useControls({
