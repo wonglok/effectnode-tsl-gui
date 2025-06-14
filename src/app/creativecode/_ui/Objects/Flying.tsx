@@ -21,7 +21,7 @@ import * as THREE from 'three/webgpu'
 
 import { types } from '@theatre/core'
 import { FlyPlaneSheet } from './FlyPlaneSheet'
-import { useTexture, useVideoTexture } from '@react-three/drei'
+import { useVideoTexture } from '@react-three/drei'
 
 export function Flying() {
   //
@@ -57,7 +57,7 @@ export function Flying() {
     const elevation = xBand.add(yBand).mul(Unis.size)
 
     phyMat.positionNode = positionLocal.add(vec3(0, 0, elevation))
-    phyMat.normalNode = vec3(vec4(positionLocal.add(vec3(0, 0, elevation)), 1.0).mul(modelViewMatrix)).normalize()
+    phyMat.normalNode = vec3(vec4(positionLocal.add(vec3(0, 0, elevation)), 1.0)).normalize()
 
     phyMat.colorNode = convertColorSpace(texture(tex), THREE.LinearSRGBColorSpace, THREE.SRGBColorSpace).mul(
       mix(
@@ -68,6 +68,8 @@ export function Flying() {
         sin(elevation).mul(cos(elevation)),
       ),
     )
+
+    // phyMat.node =
 
     return { material: phyMat }
   }, [])
@@ -125,7 +127,7 @@ export function Flying() {
   return (
     <>
       <mesh material={material} scale={[aspect, 1, 1]} rotation={[-0.5 * Math.PI, 0, 0]}>
-        <planeGeometry args={[2, 2, 256, 256]} />
+        <planeGeometry args={[2, 2, Math.floor(256 * aspect), 256]} />
       </mesh>
     </>
   )
