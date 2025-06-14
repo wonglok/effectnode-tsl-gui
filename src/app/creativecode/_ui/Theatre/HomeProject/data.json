@@ -10,7 +10,7 @@
               "b": 0.13333333333333333,
               "a": 1
             },
-            "frequencyX": 14,
+            "frequencyX": 5,
             "frequencyY": 11,
             "metalness": 0,
             "colorA": {
@@ -25,7 +25,7 @@
               "b": 1,
               "a": 1
             },
-            "size": 0.4430379746835432,
+            "size": 1.5506329113924051,
             "scale": {
               "y": 1
             },
@@ -37,6 +37,7 @@
   },
   "definitionVersion": "0.4.0",
   "revisionHistory": [
+    "g7Yl44beH_rY7x1q",
     "mBU7q-3qGXqEgPjf",
     "vBKIoi-umCNmb16L",
     "2SZNW-mscWA9e_SE",

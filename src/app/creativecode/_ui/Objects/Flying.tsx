@@ -25,9 +25,6 @@ import { useVideoTexture } from '@react-three/drei'
 
 export function Flying() {
   //
-  useFrame((st) => {
-    st.gl.render(st.scene, st.camera)
-  }, 1)
 
   let beach = `${location.origin}/video/sand.mp4`
 
@@ -48,6 +45,7 @@ export function Flying() {
   }, [])
 
   const { material } = useMemo(() => {
+    //
     const phyMat = new THREE.MeshPhysicalNodeMaterial({
       side: THREE.DoubleSide,
     })

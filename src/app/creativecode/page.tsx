@@ -36,9 +36,12 @@ export default function Page() {
           <Environment files={[`/hdr/brown_photostudio_02_1k.hdr`]}></Environment>
           <Flying />
           <OrbitControls object-position={[0, 1.5, 2.5]}></OrbitControls>
-          <Stats></Stats>
+          {process.env.NODE_ENV === 'development' && (
+            <>
+              <Stats></Stats>
+            </>
+          )}
         </Suspense>
-        {/*  */}
       </Canvas>
     </div>
   )
