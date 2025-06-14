@@ -35,10 +35,6 @@ export function Flying() {
   let aspect = tex.image.videoWidth / tex.image.videoHeight
   //
 
-  /*
-   */
-
-  //
   const Unis = useMemo(() => {
     return {
       //
