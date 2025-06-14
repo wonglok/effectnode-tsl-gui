@@ -98,17 +98,21 @@ export default function Page() {
           const renderer = new WebGPURenderer({
             canvas: st.canvas as HTMLCanvasElement,
           })
-          await renderer.init()
+          if (!renderer._initialized) {
+            await renderer.init()
+          }
 
           return renderer
         }}
       >
+        {/*  */}
         <Suspense fallback={null}>
           <Environment files={[`/hdr/brown_photostudio_02_1k.hdr`]}></Environment>
           <Scene />
           <OrbitControls></OrbitControls>
           <Stats></Stats>
         </Suspense>
+        {/*  */}
       </Canvas>
     </div>
   )
