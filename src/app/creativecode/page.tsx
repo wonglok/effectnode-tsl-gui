@@ -2,10 +2,9 @@
 
 import { Canvas, useFrame, extend } from '@react-three/fiber'
 import { Suspense, useEffect, useMemo } from 'react'
-import { MeshStandardNodeMaterial, WebGPURenderer } from 'three/webgpu'
+import { WebGPURenderer } from 'three/webgpu'
 import { mix, modelWorldMatrix, positionLocal, sin, time, uniform, uv, vec3, vec4 } from 'three/tsl'
 import { Environment, OrbitControls, Stats } from '@react-three/drei'
-import { ReactThreeFiber } from '@react-three/fiber'
 import * as THREE from 'three/webgpu'
 
 import studio from '@theatre/studio'
@@ -19,14 +18,6 @@ if (process.env.NODE_ENV === 'development') {
 
 extend({ ...(THREE as any) })
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      MeshStandardNodeMaterial: ReactThreeFiber.ThreeToJSXElements<MeshStandardNodeMaterial>
-    }
-  }
-}
-
 function Scene() {
   useFrame((st) => {
     st.gl.render(st.scene, st.camera)
@@ -34,6 +25,7 @@ function Scene() {
 
   const uni = useMemo(() => {
     return {
+      //
       frequencyX: uniform(10),
       frequencyY: uniform(10),
     }
