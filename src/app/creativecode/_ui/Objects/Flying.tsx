@@ -26,26 +26,24 @@ export function Flying() {
   }, [])
 
   const { material } = useMemo(() => {
-    const material = new THREE.MeshPhysicalNodeMaterial({
+    const phyMat = new THREE.MeshPhysicalNodeMaterial({
       side: THREE.DoubleSide,
     })
 
-    const modelPosition = vec4(positionLocal, 1)
-
-    const xBand = sin(modelPosition.x.mul(Unis.frequencyX).sub(time)).mul(0.1)
-    const yBand = sin(modelPosition.y.mul(Unis.frequencyY).sub(time)).mul(0.1)
+    const xBand = sin(positionLocal.x.mul(Unis.frequencyX).sub(time)).mul(0.1)
+    const yBand = sin(positionLocal.y.mul(Unis.frequencyY).sub(time)).mul(0.1)
     const elevation = xBand.add(yBand).mul(Unis.size)
 
-    material.positionNode = positionLocal.add(vec3(0, 0, elevation))
-    material.normalNode = vec3(vec4(positionLocal.add(vec3(0, 0, elevation)), 1.0).mul(modelViewMatrix)).normalize()
+    phyMat.positionNode = positionLocal.add(vec3(0, 0, elevation))
+    phyMat.normalNode = vec3(vec4(positionLocal.add(vec3(0, 0, elevation)), 1.0).mul(modelViewMatrix)).normalize()
 
-    material.colorNode = mix(
+    phyMat.colorNode = mix(
       Unis.color1,
       Unis.color2,
       sin(elevation).mul(0.5).add(0.5).mul(cos(elevation)).mul(0.5).add(0.5),
     )
 
-    return { material }
+    return { material: phyMat }
   }, [])
 
   //
