@@ -2,11 +2,11 @@
 
 import { Canvas, useFrame, extend } from '@react-three/fiber'
 import { useControls } from 'leva'
-import { useMemo } from 'react'
+import { Suspense, useMemo } from 'react'
 import * as THREE from 'three/webgpu'
 import { MeshStandardNodeMaterial, WebGPURenderer } from 'three/webgpu'
 import { mix, modelWorldMatrix, positionLocal, sin, time, uniform, uv, vec3, vec4 } from 'three/tsl'
-import { OrbitControls } from '@react-three/drei'
+import { Environment, OrbitControls, Stats, StatsGl } from '@react-three/drei'
 import { ReactThreeFiber, ThreeElement } from '@react-three/fiber'
 
 extend({ ...(THREE as {}) })
@@ -32,20 +32,28 @@ function Scene() {
   }, [])
 
   const customMaterial = useMemo(() => {
-    const material = new THREE.MeshBasicNodeMaterial()
-    const myTime = time
+    const material = new THREE.MeshPhysicalNodeMaterial({
+      side: THREE.DoubleSide,
+    })
 
     // vertex
     const modelPosition = modelWorldMatrix.mul(vec4(positionLocal, 1))
-    const elevation = sin(modelPosition.x.mul(uniforms.frequencyX).sub(myTime))
+    const elevation = sin(modelPosition.x.mul(uniforms.frequencyX).sub(time))
       .mul(0.1)
-      .add(sin(modelPosition.z.mul(uniforms.frequencyY).sub(myTime)).mul(0.1))
+      .add(sin(modelPosition.z.mul(uniforms.frequencyY).sub(time)).mul(0.1))
+
     material.positionNode = positionLocal.add(vec3(0, 0, elevation))
 
     // fragment
     const color1 = vec3(uv(), 1.0)
     const color2 = vec3(1.0, uv())
-    material.colorNode = mix(color1, color2, sin(myTime).mul(0.5).add(0.5))
+    material.colorNode = mix(
+      color1,
+      color2,
+      sin(time.add(elevation.mul(50)))
+        .mul(0.5)
+        .add(0.5),
+    )
 
     return material
   }, [uniforms])
@@ -65,7 +73,7 @@ function Scene() {
   return (
     <>
       <mesh material={customMaterial} rotation-x={-Math.PI * 0.5}>
-        <planeGeometry args={[1, 1, 512, 512]} />
+        <planeGeometry args={[1, 1, 128, 128]} />
       </mesh>
     </>
   )
@@ -78,7 +86,7 @@ export default function Page() {
   return (
     <div className='w-full h-full'>
       <Canvas
-        gl={(st: any) => {
+        gl={async (st: any) => {
           const renderer = new WebGPURenderer({
             canvas: st.canvas as HTMLCanvasElement,
           })
@@ -86,11 +94,17 @@ export default function Page() {
           let body = document.querySelector('body')
           renderer.setSize(body?.clientWidth || 1, body?.clientHeight || 1)
           renderer.setPixelRatio(window.devicePixelRatio || 1)
+
+          await renderer.init()
           return renderer
         }}
       >
+        <Suspense fallback={null}>
+          <Environment files={[`/hdr/brown_photostudio_02_1k.hdr`]}></Environment>
+          <Scene />
+        </Suspense>
         <OrbitControls></OrbitControls>
-        <Scene />
+        <Stats></Stats>
       </Canvas>
     </div>
   )
