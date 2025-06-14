@@ -68,28 +68,24 @@ function Scene() {
 
   //
   useEffect(() => {
-    let box1 = FlyPlaneSheet.object('flying1', {
-      position: { x: 0, y: 0, z: 0 },
-      rotation: { x: 0, y: 0, z: 0 },
-      scale: { x: 1, y: 1, z: 1 },
-      colorA: types.rgba(
-        { ...new THREE.Color('#ff0000'), a: 1 },
-        {
-          //
-        },
-      ),
-      colorB: types.rgba(
-        { ...new THREE.Color('#0000ff'), a: 1 },
-        {
-          //
-        },
-      ),
-      frequencyX: 10,
-      frequencyY: 10,
-      metalness: types.number(0, {
-        range: [0, 2],
-      }),
-    })
+    let box1 = FlyPlaneSheet.object(
+      'flying1',
+      {
+        position: { x: 0, y: 0, z: 0 },
+        rotation: { x: 0, y: 0, z: 0 },
+        scale: { x: 1, y: 1, z: 1 },
+        colorA: types.rgba({ ...new THREE.Color('#ff0000'), a: 1 }, {}),
+        colorB: types.rgba({ ...new THREE.Color('#0000ff'), a: 1 }, {}),
+        frequencyX: 10,
+        frequencyY: 10,
+        metalness: types.number(0, {
+          range: [0, 2],
+        }),
+      },
+      {
+        reconfigure: true,
+      },
+    )
 
     return box1.onValuesChange((values) => {
       //
@@ -147,7 +143,7 @@ export default function Page() {
         <Suspense fallback={null}>
           <Environment files={[`/hdr/brown_photostudio_02_1k.hdr`]}></Environment>
           <Scene />
-          <OrbitControls></OrbitControls>
+          <OrbitControls object-position={[0, 2.5, 5]}></OrbitControls>
           <Stats></Stats>
         </Suspense>
         {/*  */}
