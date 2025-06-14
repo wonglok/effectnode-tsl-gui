@@ -14,7 +14,7 @@ extend({ ...(THREE as {}) })
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      meshStandardNodeMaterial: ReactThreeFiber.ThreeToJSXElements<MeshStandardNodeMaterial>
+      MeshStandardNodeMaterial: ReactThreeFiber.ThreeToJSXElements<MeshStandardNodeMaterial>
     }
   }
 }
