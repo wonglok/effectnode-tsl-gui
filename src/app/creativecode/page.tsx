@@ -93,23 +93,23 @@ export default function Page() {
   //
   return (
     <div className='w-full h-full'>
-      <Suspense fallback={null}>
-        <Canvas
-          gl={async (st: any) => {
-            const renderer = new WebGPURenderer({
-              canvas: st.canvas as HTMLCanvasElement,
-            })
-            await renderer.init()
+      <Canvas
+        gl={async (st: any) => {
+          const renderer = new WebGPURenderer({
+            canvas: st.canvas as HTMLCanvasElement,
+          })
+          await renderer.init()
 
-            return renderer
-          }}
-        >
+          return renderer
+        }}
+      >
+        <Suspense fallback={null}>
           <Environment files={[`/hdr/brown_photostudio_02_1k.hdr`]}></Environment>
           <Scene />
           <OrbitControls></OrbitControls>
           <Stats></Stats>
-        </Canvas>
-      </Suspense>
+        </Suspense>
+      </Canvas>
     </div>
   )
 }
