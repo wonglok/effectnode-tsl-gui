@@ -28,7 +28,7 @@ function Scene() {
 
   const uniformGroup = useMemo(() => {
     return {
-      frequencyX: uniform(10),
+      frequencyX: uniform(5),
       frequencyY: uniform(5),
     }
   }, [])
@@ -45,6 +45,7 @@ function Scene() {
       .add(sin(modelPosition.z.mul(uniformGroup.frequencyY).sub(time)).mul(0.1))
 
     material.positionNode = positionLocal.add(vec3(0, 0, elevation))
+    material.normalNode = positionLocal.add(vec3(0, 0, elevation)).normalize()
 
     // fragment
     const color1 = vec3(uv(), 1.0)
@@ -62,7 +63,7 @@ function Scene() {
 
   useControls({
     frequency: {
-      value: [10, 5],
+      value: [20, 20],
       onChange: (value: [number, number]) => {
         uniformGroup.frequencyX.value = value[0]
         uniformGroup.frequencyY.value = value[1]
