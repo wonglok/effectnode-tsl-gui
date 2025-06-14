@@ -24,7 +24,7 @@ function Scene() {
     st.gl.render(st.scene, st.camera)
   }, 1)
 
-  const uniforms = useMemo(() => {
+  const uniformGroup = useMemo(() => {
     return {
       frequencyX: uniform(10),
       frequencyY: uniform(5),
@@ -38,9 +38,9 @@ function Scene() {
 
     // vertex
     const modelPosition = modelWorldMatrix.mul(vec4(positionLocal, 1))
-    const elevation = sin(modelPosition.x.mul(uniforms.frequencyX).sub(time))
+    const elevation = sin(modelPosition.x.mul(uniformGroup.frequencyX).sub(time))
       .mul(0.1)
-      .add(sin(modelPosition.z.mul(uniforms.frequencyY).sub(time)).mul(0.1))
+      .add(sin(modelPosition.z.mul(uniformGroup.frequencyY).sub(time)).mul(0.1))
 
     material.positionNode = positionLocal.add(vec3(0, 0, elevation))
 
@@ -50,20 +50,20 @@ function Scene() {
     material.colorNode = mix(
       color1,
       color2,
-      sin(time.add(elevation.mul(50)))
+      sin(time.add(elevation.mul(25)))
         .mul(0.5)
         .add(0.5),
     )
 
     return material
-  }, [uniforms])
+  }, [uniformGroup])
 
   useControls({
     frequency: {
       value: [10, 5],
       onChange: (value: [number, number]) => {
-        uniforms.frequencyX.value = value[0]
-        uniforms.frequencyY.value = value[1]
+        uniformGroup.frequencyX.value = value[0]
+        uniformGroup.frequencyY.value = value[1]
       },
     },
   })
