@@ -11,6 +11,7 @@ import * as THREE from 'three/webgpu'
 import studio from '@theatre/studio'
 import { FlyPlaneSheet } from './_ui/Theatre/FlyPlaneSheet'
 import { types } from '@theatre/core'
+import '@theatre/core'
 
 if (process.env.NODE_ENV === 'development') {
   studio.initialize()
