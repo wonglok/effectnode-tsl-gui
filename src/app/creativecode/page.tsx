@@ -2,12 +2,13 @@
 
 import { Canvas, useFrame, extend } from '@react-three/fiber'
 import { useControls } from 'leva'
-import { Suspense, useMemo } from 'react'
+import { Suspense, useMemo, useState } from 'react'
 import * as THREE from 'three/webgpu'
 import { MeshStandardNodeMaterial, WebGPURenderer } from 'three/webgpu'
-import { mix, modelWorldMatrix, positionLocal, sin, time, uniform, uv, vec3, vec4 } from 'three/tsl'
-import { Environment, OrbitControls, Stats, StatsGl } from '@react-three/drei'
-import { ReactThreeFiber, ThreeElement } from '@react-three/fiber'
+import { mix, modelWorldMatrix, positionLocal, sin, texture, time, uniform, uv, vec3, vec4 } from 'three/tsl'
+import { Environment, OrbitControls, Stats } from '@react-three/drei'
+import { ReactThreeFiber } from '@react-three/fiber'
+import { VideoTex } from './_ui/VideoTex'
 
 extend({ ...(THREE as {}) })
 
@@ -20,6 +21,7 @@ declare global {
 }
 
 function Scene() {
+  let [tex, setTex] = useState<THREE.Texture | undefined>(undefined)
   useFrame((st) => {
     st.gl.render(st.scene, st.camera)
   }, 1)
@@ -53,7 +55,7 @@ function Scene() {
       sin(time.add(elevation.mul(25)))
         .mul(0.5)
         .add(0.5),
-    )
+    ).add(texture(tex))
 
     return material
   }, [uniformGroup])
@@ -72,6 +74,7 @@ function Scene() {
 
   return (
     <>
+      <VideoTex src={`/video/1321208-uhd_3840_2160_30fps.mp4`} onReady={setTex}></VideoTex>
       <mesh material={customMaterial} rotation-x={-Math.PI * 0.5}>
         <planeGeometry args={[1, 1, 128, 128]} />
       </mesh>
