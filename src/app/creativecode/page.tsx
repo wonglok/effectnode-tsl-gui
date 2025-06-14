@@ -50,12 +50,12 @@ function Scene() {
 
     const xBand = sin(modelPosition.x.mul(uni.frequencyX).sub(time)).mul(0.1)
     const yBand = sin(modelPosition.y.mul(uni.frequencyY).sub(time)).mul(0.1)
-    const elevation = xBand.add(yBand)
+    const elevation = xBand.add(yBand).mul(uni.size)
 
-    material.positionNode = positionLocal.add(vec3(0, 0, elevation.mul(uni.size)))
-    material.normalNode = positionLocal.normalize()
+    material.positionNode = positionLocal.add(vec3(0, 0, elevation))
+    material.normalNode = positionLocal.add(vec3(0, 0, elevation)).normalize()
 
-    material.colorNode = mix(uni.color1, uni.color2, sin(elevation).mul(cos(elevation)).mul(uni.size).mul(0.5).add(0.5))
+    material.colorNode = mix(uni.color1, uni.color2, sin(elevation).mul(cos(elevation)).mul(0.5).add(0.5))
 
     return { material }
   }, [])
