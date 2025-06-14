@@ -55,10 +55,7 @@ function Scene() {
     material.colorNode = mix(
       uni.color1,
       uni.color2,
-      sin(time.mul(elevation).mul(uv().x.mul(2).sub(1)).mul(uv().y.mul(2).sub(1)))
-        .mul(cos(time.mul(elevation).mul(uv().x.mul(2).sub(1)).mul(uv().y.mul(2).sub(1))))
-        .mul(0.5)
-        .add(0.5),
+      sin(time.mul(elevation.mul(0.1))).mul(cos(time.mul(elevation.mul(0.1)))),
     )
 
     return { material }
