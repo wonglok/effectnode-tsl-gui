@@ -8,11 +8,11 @@ import { Environment, OrbitControls, Stats } from '@react-three/drei'
 import { ReactThreeFiber } from '@react-three/fiber'
 import * as THREE from 'three/webgpu'
 
-// import studio from '@theatre/studio'
+import studio from '@theatre/studio'
 
-// if (process.env.NODE_ENV === 'development') {
-//   studio.initialize()
-// }
+if (process.env.NODE_ENV === 'development') {
+  studio.initialize()
+}
 
 extend({ ...(THREE as any) })
 
