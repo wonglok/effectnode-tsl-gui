@@ -10,27 +10,31 @@
               "b": 0.13333333333333333,
               "a": 1
             },
-            "frequencyX": 9,
-            "frequencyY": 8,
-            "metalness": 1.2658227848101256,
+            "frequencyX": 2,
+            "frequencyY": 1,
+            "metalness": 0.8101265822784813,
             "colorA": {
-              "r": 0.10980392156862745,
+              "r": 0.2901960784313726,
               "g": 1,
-              "b": 0,
+              "b": 0.11372549019607843,
               "a": 1
             },
             "colorB": {
-              "r": 0.2549019607843137,
-              "g": 0.2549019607843137,
+              "r": 0.6392156862745098,
+              "g": 0.6392156862745098,
               "b": 1,
               "a": 1
             },
-            "size": 1.1392405063291144
+            "size": 3.0063291139240556,
+            "scale": {
+              "y": 1
+            },
+            "roughness": 0.45569620253164567
           }
         }
       }
     }
   },
   "definitionVersion": "0.4.0",
-  "revisionHistory": ["kiUSoBejDoMnNTId", "srH2OXUp6QDJAb-Z"]
+  "revisionHistory": ["2SZNW-mscWA9e_SE", "kiUSoBejDoMnNTId", "srH2OXUp6QDJAb-Z"]
 }
