@@ -35,6 +35,10 @@ export function Flying() {
   let aspect = tex.image.videoWidth / tex.image.videoHeight
   //
 
+  /*
+   */
+
+  //
   const Unis = useMemo(() => {
     return {
       //
@@ -59,15 +63,19 @@ export function Flying() {
     phyMat.positionNode = positionLocal.add(vec3(0, 0, elevation))
     phyMat.normalNode = vec3(vec4(positionLocal.add(vec3(0, 0, elevation)), 1.0)).normalize()
 
-    phyMat.colorNode = convertColorSpace(texture(tex), THREE.LinearSRGBColorSpace, THREE.SRGBColorSpace).mul(
+    tex.mapping = THREE.EquirectangularReflectionMapping
+
+    const texColor = convertColorSpace(texture(tex), THREE.LinearSRGBColorSpace, THREE.SRGBColorSpace).mul(
       mix(
         Unis.color1,
         Unis.color2,
         //
-
         sin(elevation).mul(cos(elevation)),
       ),
     )
+
+    //
+    phyMat.colorNode = texColor
 
     // phyMat.node =
 

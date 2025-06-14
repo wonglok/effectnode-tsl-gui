@@ -10,9 +10,9 @@
               "b": 0.13333333333333333,
               "a": 1
             },
-            "frequencyX": 2,
-            "frequencyY": 1,
-            "metalness": 0.1962025316455701,
+            "frequencyX": 14,
+            "frequencyY": 11,
+            "metalness": 0,
             "colorA": {
               "r": 1,
               "g": 1,
@@ -25,7 +25,7 @@
               "b": 1,
               "a": 1
             },
-            "size": 1.0759493670886124,
+            "size": 0.4430379746835432,
             "scale": {
               "y": 1
             },
@@ -36,5 +36,11 @@
     }
   },
   "definitionVersion": "0.4.0",
-  "revisionHistory": ["vBKIoi-umCNmb16L", "2SZNW-mscWA9e_SE", "kiUSoBejDoMnNTId", "srH2OXUp6QDJAb-Z"]
+  "revisionHistory": [
+    "mBU7q-3qGXqEgPjf",
+    "vBKIoi-umCNmb16L",
+    "2SZNW-mscWA9e_SE",
+    "kiUSoBejDoMnNTId",
+    "srH2OXUp6QDJAb-Z"
+  ]
 }
