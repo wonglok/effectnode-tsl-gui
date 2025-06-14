@@ -38,6 +38,9 @@ function Scene() {
     }
   }, [])
 
+  //
+  //
+
   const { material } = useMemo(() => {
     const material = new THREE.MeshPhysicalNodeMaterial({
       side: THREE.DoubleSide,
