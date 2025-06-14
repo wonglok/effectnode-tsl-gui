@@ -1,20 +1,18 @@
 'use client'
 
 import { Canvas, useFrame, extend } from '@react-three/fiber'
-import { useControls } from 'leva'
 import { Suspense, useMemo, useState } from 'react'
 import * as THREE from 'three/webgpu'
 import { MeshStandardNodeMaterial, WebGPURenderer } from 'three/webgpu'
 import { mix, modelWorldMatrix, positionLocal, sin, texture, time, uniform, uv, vec3, vec4 } from 'three/tsl'
 import { Environment, OrbitControls, Stats } from '@react-three/drei'
 import { ReactThreeFiber } from '@react-three/fiber'
-import { VideoTex } from './_ui/VideoTex'
 
-import studio from '@theatre/studio'
+// import studio from '@theatre/studio'
 
-if (process.env.NODE_ENV === 'development') {
-  studio.initialize()
-}
+// if (process.env.NODE_ENV === 'development') {
+//   studio.initialize()
+// }
 
 extend({ ...(THREE as {}) })
 
@@ -27,7 +25,6 @@ declare global {
 }
 
 function Scene() {
-  let [tex, setTex] = useState<THREE.Texture | undefined>(undefined)
   useFrame((st) => {
     st.gl.render(st.scene, st.camera)
   }, 1)
@@ -44,7 +41,6 @@ function Scene() {
       side: THREE.DoubleSide,
     })
 
-    // vertex
     const modelPosition = modelWorldMatrix.mul(vec4(positionLocal, 1))
     const elevation = sin(modelPosition.x.mul(uni.frequencyX).sub(time))
       .mul(0.1)
@@ -53,16 +49,17 @@ function Scene() {
     material.positionNode = positionLocal.add(vec3(0, 0, elevation))
     material.normalNode = positionLocal.add(vec3(0, 0, elevation)).normalize()
 
-    // fragment
     const color1 = vec3(uv(), 1.0)
+
     const color2 = vec3(1.0, uv())
+
     material.colorNode = mix(
       color1,
       color2,
       sin(time.add(elevation.mul(25)))
         .mul(0.5)
         .add(0.5),
-    ).add(texture(tex))
+    )
 
     return material
   }, [uni])
@@ -81,7 +78,6 @@ function Scene() {
 
   return (
     <>
-      <VideoTex src={`/video/1321208-uhd_3840_2160_30fps.mp4`} onReady={setTex}></VideoTex>
       <mesh material={customMaterial} rotation-x={-Math.PI * 0.5}>
         <planeGeometry args={[1, 1, 128, 128]} />
       </mesh>
