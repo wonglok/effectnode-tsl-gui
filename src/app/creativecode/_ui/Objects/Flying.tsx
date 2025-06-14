@@ -5,8 +5,8 @@ import { useEffect, useMemo } from 'react'
 import { cos, mix, positionLocal, sin, time, uniform, uv, vec3, vec4 } from 'three/tsl'
 import * as THREE from 'three/webgpu'
 
-import { FlyPlaneSheet } from '../Theatre/FlyPlaneSheet'
 import { types } from '@theatre/core'
+import { FlyPlaneSheet } from './FlyPlaneSheet'
 
 export function Flying() {
   useFrame((st) => {

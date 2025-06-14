@@ -1,6 +1,6 @@
 import { getProject } from '@theatre/core'
 // import statev001 from './'
-import state001 from './HomeProject/HomeProject.theatre-project-state.json'
+import state001 from './data.json'
 
 const config: any = {
   state: false,
