@@ -16,12 +16,7 @@ if (process.env.NODE_ENV === 'development') {
 
 extend({ ...(THREE as any) })
 
-// FlyPlaneSheet
-
 export default function Page() {
-  //
-
-  //
   return (
     <div className='w-full h-full'>
       <Canvas
