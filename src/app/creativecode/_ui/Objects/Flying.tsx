@@ -2,7 +2,7 @@
 
 import { useFrame } from '@react-three/fiber'
 import { useEffect, useMemo } from 'react'
-import { cos, mix, positionLocal, sin, time, uniform, uv, vec3, vec4 } from 'three/tsl'
+import { cos, mix, modelViewMatrix, positionLocal, roughness, sin, time, uniform, uv, vec3, vec4 } from 'three/tsl'
 import * as THREE from 'three/webgpu'
 
 import { types } from '@theatre/core'
@@ -37,7 +37,7 @@ export function Flying() {
     const elevation = xBand.add(yBand).mul(Unis.size)
 
     material.positionNode = positionLocal.add(vec3(0, 0, elevation))
-    material.normalNode = positionLocal.add(vec3(0, 0, elevation)).normalize()
+    material.normalNode = vec3(vec4(positionLocal.add(vec3(0, 0, elevation)), 1.0).mul(modelViewMatrix)).normalize()
 
     material.colorNode = mix(Unis.color1, Unis.color2, sin(elevation).mul(cos(elevation)).mul(0.5).add(0.5))
 
@@ -57,8 +57,13 @@ export function Flying() {
         colorB: types.rgba({ ...new THREE.Color('#0000ff'), a: 1 }, {}),
         frequencyX: 10,
         frequencyY: 10,
+        //
+        //
         metalness: types.number(0, {
-          range: [0, 2],
+          range: [0, 1],
+        }),
+        roughness: types.number(0, {
+          range: [0, 1],
         }),
         size: types.number(1, {
           range: [0, 5],
@@ -83,6 +88,7 @@ export function Flying() {
       Unis.size.value = values.size
 
       material.metalness = values.metalness
+      material.roughness = values.roughness
 
       //
     })
