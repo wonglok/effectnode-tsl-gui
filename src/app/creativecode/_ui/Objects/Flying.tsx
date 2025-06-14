@@ -39,7 +39,11 @@ export function Flying() {
     material.positionNode = positionLocal.add(vec3(0, 0, elevation))
     material.normalNode = vec3(vec4(positionLocal.add(vec3(0, 0, elevation)), 1.0).mul(modelViewMatrix)).normalize()
 
-    material.colorNode = mix(Unis.color1, Unis.color2, sin(elevation).mul(cos(elevation)).mul(0.5).add(0.5))
+    material.colorNode = mix(
+      Unis.color1,
+      Unis.color2,
+      sin(elevation).mul(0.5).add(0.5).mul(cos(elevation)).mul(0.5).add(0.5),
+    )
 
     return { material }
   }, [])
