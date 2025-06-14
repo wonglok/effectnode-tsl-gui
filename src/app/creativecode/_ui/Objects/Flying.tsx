@@ -65,7 +65,8 @@ export function Flying() {
 
     tex.mapping = THREE.EquirectangularReflectionMapping
 
-    const texColor = convertColorSpace(texture(tex), THREE.LinearSRGBColorSpace, THREE.SRGBColorSpace).mul(
+    const col = convertColorSpace(texture(tex), THREE.LinearSRGBColorSpace, THREE.SRGBColorSpace)
+    const texColor = col.mul(
       mix(
         Unis.color1,
         Unis.color2,
@@ -82,7 +83,6 @@ export function Flying() {
     return { material: phyMat }
   }, [])
 
-  //
   useEffect(() => {
     let box1 = FlyPlaneSheet.object(
       'flying1',
