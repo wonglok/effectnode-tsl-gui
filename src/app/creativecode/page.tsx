@@ -1,14 +1,28 @@
 'use client'
 
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, extend } from '@react-three/fiber'
 import { useControls } from 'leva'
 import { useMemo } from 'react'
+import * as THREE from 'three/webgpu'
 import { MeshStandardNodeMaterial, WebGPURenderer } from 'three/webgpu'
 import { mix, modelWorldMatrix, positionLocal, sin, time, uniform, uv, vec3, vec4 } from 'three/tsl'
-import { NodeMaterial } from 'three/webgpu'
+import { OrbitControls } from '@react-three/drei'
+import { ReactThreeFiber, ThreeElement } from '@react-three/fiber'
+
+extend({ ...(THREE as {}) })
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      meshStandardNodeMaterial: ReactThreeFiber.ThreeToJSXElements<MeshStandardNodeMaterial>
+    }
+  }
+}
 
 function Scene() {
-  useFrame(() => {}, 1)
+  useFrame((st) => {
+    st.gl.render(st.scene, st.camera)
+  }, 1)
 
   const uniforms = useMemo(() => {
     return {
@@ -18,7 +32,7 @@ function Scene() {
   }, [])
 
   const customMaterial = useMemo(() => {
-    const material = new MeshStandardNodeMaterial()
+    const material = new THREE.MeshBasicNodeMaterial()
     const myTime = time
 
     // vertex
@@ -71,9 +85,11 @@ export default function Page() {
 
           let body = document.querySelector('body')
           renderer.setSize(body?.clientWidth || 1, body?.clientHeight || 1)
+          renderer.setPixelRatio(window.devicePixelRatio || 1)
           return renderer
         }}
       >
+        <OrbitControls></OrbitControls>
         <Scene />
       </Canvas>
     </div>
