@@ -1,12 +1,12 @@
 'use client'
 
 import { Canvas, useFrame, extend } from '@react-three/fiber'
-import { Suspense, useMemo, useState } from 'react'
-import * as THREE from 'three/webgpu'
+import { Suspense, useMemo } from 'react'
 import { MeshStandardNodeMaterial, WebGPURenderer } from 'three/webgpu'
-import { mix, modelWorldMatrix, positionLocal, sin, texture, time, uniform, uv, vec3, vec4 } from 'three/tsl'
+import { mix, modelWorldMatrix, positionLocal, sin, time, uniform, uv, vec3, vec4 } from 'three/tsl'
 import { Environment, OrbitControls, Stats } from '@react-three/drei'
 import { ReactThreeFiber } from '@react-three/fiber'
+import * as THREE from 'three/webgpu'
 
 // import studio from '@theatre/studio'
 
@@ -14,7 +14,7 @@ import { ReactThreeFiber } from '@react-three/fiber'
 //   studio.initialize()
 // }
 
-extend({ ...(THREE as {}) })
+extend({ ...(THREE as any) })
 
 declare global {
   namespace JSX {
@@ -99,12 +99,8 @@ export default function Page() {
             const renderer = new WebGPURenderer({
               canvas: st.canvas as HTMLCanvasElement,
             })
-
-            let body = document.querySelector('body')
-            renderer.setSize(body?.clientWidth || 1, body?.clientHeight || 1)
-            renderer.setPixelRatio(window.devicePixelRatio || 1)
-
             await renderer.init()
+
             return renderer
           }}
         >
