@@ -2,7 +2,7 @@
 
 import '@theatre/core'
 import { Canvas, extend } from '@react-three/fiber'
-import { Suspense } from 'react'
+import { Suspense, useState } from 'react'
 import { WebGPURenderer } from 'three/webgpu'
 import { Environment, OrbitControls, Stats } from '@react-three/drei'
 import * as THREE from 'three/webgpu'

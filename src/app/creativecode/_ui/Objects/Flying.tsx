@@ -20,14 +20,13 @@ import {
 } from 'three/tsl'
 import * as THREE from 'three/webgpu'
 
-import { types } from '@theatre/core'
+import { ISheet, types } from '@theatre/core'
 // import { FlyPlaneSheet } from './FlyPlaneSheet'
 import { useVideoTexture } from '@react-three/drei'
-import { getFlyPlaneSheet } from './FlyPlaneSheet'
+import { getFlyPlaneSheet, useSheetHome } from './FlyPlaneSheet'
+import useSWR from 'swr'
 
 export function Flying() {
-  //
-
   let beach = `${location.origin}/video/sand.mp4`
 
   let tex = useVideoTexture(beach)
@@ -68,66 +67,69 @@ export function Flying() {
     return { material: phyMat }
   }, [])
 
+  let sheet = useSheetHome()
   useEffect(() => {
+    if (!sheet) {
+      return
+    }
+
     let cleans: any[] = []
 
-    getFlyPlaneSheet().then((sheet) => {
-      let box1 = sheet.object(
-        'flying1',
-        {
-          // position: { x: 0, y: 0, z: 0 },
-          // rotation: { x: 0, y: 0, z: 0 },
-          // scale: { x: 1, y: 1, z: 1 },
-          //
-          colorA: types.rgba({ ...new THREE.Color('#ff0000'), a: 1 }, {}),
-          colorB: types.rgba({ ...new THREE.Color('#0000ff'), a: 1 }, {}),
-          frequencyX: 10,
-          frequencyY: 10,
-          //
-          //
-          metalness: types.number(0, {
-            range: [0, 1],
-          }),
-          roughness: types.number(0, {
-            range: [0, 1],
-          }),
-          size: types.number(1, {
-            range: [0, 5],
-          }),
-        },
-        {
-          reconfigure: true,
-        },
-      )
-
-      cleans.push(
-        box1.onValuesChange((values) => {
-          //
-
-          Unis.frequencyX.value = values.frequencyX
-          Unis.frequencyY.value = values.frequencyY
-
-          Unis.color1.value.setRGB(values.colorA.r, values.colorA.g, values.colorA.b)
-          Unis.color2.value.setRGB(values.colorB.r, values.colorB.g, values.colorB.b)
-
-          Unis.size.value = values.size
-
-          material.metalness = values.metalness
-          material.roughness = values.roughness
-
-          //
+    let box1 = sheet.object(
+      'flying1',
+      {
+        // position: { x: 0, y: 0, z: 0 },
+        // rotation: { x: 0, y: 0, z: 0 },
+        // scale: { x: 1, y: 1, z: 1 },
+        //
+        colorA: types.rgba({ ...new THREE.Color('#ff0000'), a: 1 }, {}),
+        colorB: types.rgba({ ...new THREE.Color('#0000ff'), a: 1 }, {}),
+        frequencyX: 10,
+        frequencyY: 10,
+        //
+        //
+        metalness: types.number(0, {
+          range: [0, 1],
         }),
-      )
+        roughness: types.number(0, {
+          range: [0, 1],
+        }),
+        size: types.number(1, {
+          range: [0, 5],
+        }),
+      },
+      {
+        reconfigure: true,
+      },
+    )
 
-      //
-    })
+    cleans.push(
+      box1.onValuesChange((values) => {
+        //
+
+        Unis.frequencyX.value = values.frequencyX
+        Unis.frequencyY.value = values.frequencyY
+
+        Unis.color1.value.setRGB(values.colorA.r, values.colorA.g, values.colorA.b)
+        Unis.color2.value.setRGB(values.colorB.r, values.colorB.g, values.colorB.b)
+
+        Unis.size.value = values.size
+
+        material.metalness = values.metalness
+        material.roughness = values.roughness
+
+        //
+      }),
+    )
+
+    //
 
     return () => {
       cleans.forEach((t) => {
         t()
       })
     }
-  }, [Unis])
+  }, [Unis, sheet])
 
   let t3 = useMemo(() => {
     return new THREE.Object3D()
@@ -140,19 +142,23 @@ export function Flying() {
     <>
       {/* <directionalLight target={t3} castShadow position={[5, 5, 5]}></directionalLight> */}
 
-      <spotLight
-        //
-        target={t3}
-        castShadow
-        position={[0, 5, 0]}
-        map={tex}
-        penumbra={1}
-        intensity={50}
-      />
+      {sheet && (
+        <>
+          <spotLight
+            //
+            target={t3}
+            castShadow
+            position={[0, 5, 0]}
+            map={tex}
+            penumbra={1}
+            intensity={50}
+          />
 
-      <mesh castShadow receiveShadow material={material} scale={[aspect, 1, 1]} rotation={[-0.5 * Math.PI, 0, 0]}>
-        <planeGeometry args={[2, 2, Math.floor(256 * aspect), 256]} />
-      </mesh>
+          <mesh castShadow receiveShadow material={material} scale={[aspect, 1, 1]} rotation={[-0.5 * Math.PI, 0, 0]}>
+            <planeGeometry args={[2, 2, Math.floor(256 * aspect), 256]} />
+          </mesh>
+        </>
+      )}
     </>
   )
 }

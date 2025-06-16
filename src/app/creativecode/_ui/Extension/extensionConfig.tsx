@@ -5,7 +5,6 @@ import type { ISheetObject } from '@theatre/core'
 import type { PaneClassDefinition, ToolsetConfig } from '@theatre/studio'
 import { createRoot } from 'react-dom/client'
 import { HomeProjectName } from '../Theatre/HomeProject'
-import { getFlyPlaneSheet } from '../Objects/FlyPlaneSheet'
 
 const dataConfig = {
   exampleProp: types.stringLiteral('yes', {
@@ -176,68 +175,68 @@ export const extensionConfig: IExtension = {
   panes: [Pane],
 }
 
-async function initDirectManipulationObject(name: string, icon: string) {
-  //
-  let sheet = await getFlyPlaneSheet()
+// async function initDirectManipulationObject(name: string, icon: string) {
+//   //
+//   let sheet = await getFlyPlaneSheet()
 
-  // await
+//   // await
 
-  const objValues = { x: 50, y: 60 }
-  const obj = sheet.object(name, objValues)
+//   const objValues = { x: 50, y: 60 }
+//   const obj = sheet.object(name, objValues)
 
-  // Create a div to animate
-  const div = document.createElement('div')
-  div.textContent = icon
-  Object.assign(div.style, {
-    cursor: 'grab',
-    width: '50px',
-    borderRadius: '100px',
-  })
-  document.body.append(div)
-  div.addEventListener('mousedown', () => studio.setSelection([obj]))
+//   // Create a div to animate
+//   const div = document.createElement('div')
+//   div.textContent = icon
+//   Object.assign(div.style, {
+//     cursor: 'grab',
+//     width: '50px',
+//     borderRadius: '100px',
+//   })
+//   document.body.append(div)
+//   div.addEventListener('mousedown', () => studio.setSelection([obj]))
 
-  // Reposition the div whenever the Theatre.js object changes
-  // CSS transform reference: https://developer.mozilla.org/en-US/docs/Web/CSS/transform
-  obj.onValuesChange((vals) => (div.style.transform = `translate(${vals.x}px, ${vals.y}px)`))
+//   // Reposition the div whenever the Theatre.js object changes
+//   // CSS transform reference: https://developer.mozilla.org/en-US/docs/Web/CSS/transform
+//   obj.onValuesChange((vals) => (div.style.transform = `translate(${vals.x}px, ${vals.y}px)`))
 
-  let currentScrub = studio.scrub()
-  let dragX = 0
-  let dragY = 0
-  let prevVal = obj.value
-  let isDragging = false
+//   let currentScrub = studio.scrub()
+//   let dragX = 0
+//   let dragY = 0
+//   let prevVal = obj.value
+//   let isDragging = false
 
-  div.addEventListener('mousedown', (e) => {
-    dragX = 0
-    dragY = 0
-    prevVal = obj.value
-    isDragging = true
-  })
-  document.addEventListener('mousemove', (e) => {
-    if (isDragging) {
-      dragX += e.movementX
-      dragY += e.movementY
-      currentScrub.capture(({ set }) => {
-        set(obj.props, {
-          ...prevVal,
-          x: prevVal.x + dragX,
-          y: prevVal.y + dragY,
-        })
-      })
-    }
-  })
+//   div.addEventListener('mousedown', (e) => {
+//     dragX = 0
+//     dragY = 0
+//     prevVal = obj.value
+//     isDragging = true
+//   })
+//   document.addEventListener('mousemove', (e) => {
+//     if (isDragging) {
+//       dragX += e.movementX
+//       dragY += e.movementY
+//       currentScrub.capture(({ set }) => {
+//         set(obj.props, {
+//           ...prevVal,
+//           x: prevVal.x + dragX,
+//           y: prevVal.y + dragY,
+//         })
+//       })
+//     }
+//   })
 
-  document.addEventListener('mouseup', (e) => {
-    currentScrub.commit()
-    currentScrub = studio.scrub()
-    isDragging = false
-  })
+//   document.addEventListener('mouseup', (e) => {
+//     currentScrub.commit()
+//     currentScrub = studio.scrub()
+//     isDragging = false
+//   })
 
-  studio.onSelectionChange((newSelecton: (ISheet | ISheetObject<any>)[]) => {
-    div.style.background = 'transparent'
-    if (newSelecton.includes(obj)) div.style.background = 'orange'
-  })
-  //
-}
+//   studio.onSelectionChange((newSelecton: (ISheet | ISheetObject<any>)[]) => {
+//     div.style.background = 'transparent'
+//     if (newSelecton.includes(obj)) div.style.background = 'orange'
+//   })
+//   //
+// }
 
 // if (typeof document !== 'undefined') {
 //   initDirectManipulationObject('🥚 obj', '🥚')
