@@ -11,10 +11,11 @@ export const getHomeProject = async () => {
     config.state = await fetch(`/states/current/state.json`).then((r) => r.json())
   } else {
     //
-    config.state = await import('../../../../../public/states/current/state.json').then((r) => r.default)
+    let data = require('../../../../../public/states/current/state.json')
+    config.state = data
   }
 
-  const project = await getProject(HomeProjectName, config)
+  const project = getProject(HomeProjectName, config)
 
   return project
 }

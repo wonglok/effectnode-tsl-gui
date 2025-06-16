@@ -10,9 +10,9 @@
 							"b": 0.13333333333333333,
 							"a": 1
 						},
-						"frequencyX": 29,
+						"frequencyX": 26,
 						"frequencyY": 6,
-						"metalness": 0.7468354430379748,
+						"metalness": 0.6772151898734178,
 						"colorA": {
 							"r": 0.12941176470588237,
 							"g": 0.3058823529411765,
@@ -25,11 +25,11 @@
 							"b": 0.26666666666666666,
 							"a": 1
 						},
-						"size": 1.4240506329113933,
+						"size": 2.088607594936709,
 						"scale": {
 							"y": 1
 						},
-						"roughness": 0.8860759493670887
+						"roughness": 0.9873417721518989
 					},
 					"🐥 obj": {
 						"x": 25
@@ -40,7 +40,6 @@
 	},
 	"definitionVersion": "0.4.0",
 	"revisionHistory": [
-		"HlUbeWhf03LqzWlC",
 		"pLB1ktBY-o_JueOB",
 		"6BUClovfUciLrbSf",
 		"QhbEVUxSB2OsVWit",
@@ -89,6 +88,7 @@
 		"mUyX49TPeTpOX1Ce",
 		"kRcs1KgpJCgPzRp1",
 		"su-7P36ykUb7OyJu",
-		"4ujgPMj3tC6l2lsS"
+		"4ujgPMj3tC6l2lsS",
+		"bJzpHiPzOyJ1OC-G"
 	]
 }
