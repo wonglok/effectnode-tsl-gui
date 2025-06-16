@@ -16,7 +16,7 @@ const dataConfig = {
 
 const saveState = async () => {
   const json = studio.createContentOfSaveFile(HomeProjectName)
-  console.log('autosave::', json)
+  console.log('save::', json)
   await fetch(`http://localhost:2329/states`, {
     mode: 'cors',
     method: 'POST',
@@ -28,7 +28,7 @@ const saveState = async () => {
     }),
   })
     .then(async (r) => {
-      console.log(r.ok, await r.json())
+      console.log('operation::', r.ok, await r.json())
     })
     .catch((r) => {
       console.log(r)
