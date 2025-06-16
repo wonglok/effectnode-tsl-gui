@@ -61,9 +61,9 @@ export function Flying() {
 
     tex.mapping = THREE.EquirectangularReflectionMapping
 
-    // const col = convertColorSpace(texture(tex), THREE.LinearSRGBColorSpace, THREE.SRGBColorSpace)
+    const col = convertColorSpace(texture(tex), THREE.LinearSRGBColorSpace, THREE.SRGBColorSpace)
 
-    phyMat.colorNode = mix(vec3(1.0), Unis.color1.mul(Unis.color2), elevation.mul(2))
+    phyMat.colorNode = mix(Unis.color1, Unis.color2, elevation.mul(2))
 
     return { material: phyMat }
   }, [])
