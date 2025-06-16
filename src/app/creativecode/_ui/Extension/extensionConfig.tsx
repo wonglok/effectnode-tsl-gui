@@ -244,3 +244,8 @@ async function initDirectManipulationObject(name: string, icon: string) {
 //   initDirectManipulationObject('🐣 obj', '🐣')
 //   initDirectManipulationObject('🐥 obj', '🐥')
 // }
+
+if (process.env.NODE_ENV === 'development') {
+  studio.extend(extensionConfig)
+  studio.initialize()
+}

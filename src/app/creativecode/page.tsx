@@ -7,16 +7,13 @@ import { WebGPURenderer } from 'three/webgpu'
 import { Environment, OrbitControls, Stats } from '@react-three/drei'
 import * as THREE from 'three/webgpu'
 
-import studio from '@theatre/studio'
 import { Flying } from './_ui/Objects/Flying'
-import { extensionConfig } from './_ui/Extension/extensionConfig'
-
-if (process.env.NODE_ENV === 'development') {
-  studio.extend(extensionConfig)
-  studio.initialize()
-}
 
 extend({ ...(THREE as any) })
+
+if (process.env.NODE_ENV === 'development') {
+  import('./_ui/Extension/extensionConfig')
+}
 
 export default function Page() {
   return (
