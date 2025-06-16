@@ -61,7 +61,7 @@ export function Flying() {
 
     const col = convertColorSpace(texture(tex), THREE.LinearSRGBColorSpace, THREE.SRGBColorSpace)
 
-    phyMat.colorNode = mix(Unis.color1, Unis.color2, elevation.mul(2))
+    phyMat.colorNode = mix(Unis.color1, Unis.color2, elevation)
 
     return { material: phyMat }
   }, [])
