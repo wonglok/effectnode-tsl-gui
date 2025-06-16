@@ -7,6 +7,7 @@ import {
   cos,
   mix,
   modelViewMatrix,
+  normalLocal,
   positionLocal,
   roughness,
   sin,
@@ -57,13 +58,12 @@ export function Flying() {
     const elevation = xBand.add(yBand).mul(Unis.size)
 
     phyMat.positionNode = positionLocal.add(vec3(0, 0, elevation))
-    phyMat.normalNode = positionLocal.add(vec3(0, 0, elevation)).normalize().mul(modelViewMatrix)
 
     tex.mapping = THREE.EquirectangularReflectionMapping
 
-    const col = convertColorSpace(texture(tex), THREE.LinearSRGBColorSpace, THREE.SRGBColorSpace)
+    // const col = convertColorSpace(texture(tex), THREE.LinearSRGBColorSpace, THREE.SRGBColorSpace)
 
-    phyMat.colorNode = col.mul(Unis.color1).mul(Unis.color2)
+    phyMat.colorNode = mix(vec3(1.0), Unis.color1.mul(Unis.color2), elevation.mul(2))
 
     return { material: phyMat }
   }, [])
@@ -138,7 +138,17 @@ export function Flying() {
   })
   return (
     <>
-      <directionalLight target={t3} castShadow position={[5, 5, 5]}></directionalLight>
+      {/* <directionalLight target={t3} castShadow position={[5, 5, 5]}></directionalLight> */}
+
+      <spotLight
+        //
+        target={t3}
+        castShadow
+        position={[0, 5, 0]}
+        map={tex}
+        penumbra={1}
+        intensity={50}
+      />
 
       <mesh castShadow receiveShadow material={material} scale={[aspect, 1, 1]} rotation={[-0.5 * Math.PI, 0, 0]}>
         <planeGeometry args={[2, 2, Math.floor(256 * aspect), 256]} />

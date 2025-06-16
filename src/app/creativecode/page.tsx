@@ -1,5 +1,6 @@
 'use client'
 
+import '@theatre/core'
 import { Canvas, extend } from '@react-three/fiber'
 import { Suspense } from 'react'
 import { WebGPURenderer } from 'three/webgpu'
@@ -7,7 +8,6 @@ import { Environment, OrbitControls, Stats } from '@react-three/drei'
 import * as THREE from 'three/webgpu'
 
 import studio from '@theatre/studio'
-import '@theatre/core'
 import { Flying } from './_ui/Objects/Flying'
 import { extensionConfig } from './_ui/Extension/extensionConfig'
 
