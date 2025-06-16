@@ -9,8 +9,10 @@ import * as THREE from 'three/webgpu'
 import studio from '@theatre/studio'
 import '@theatre/core'
 import { Flying } from './_ui/Objects/Flying'
+import { extensionConfig } from './_ui/Extension/extensionConfig'
 
 if (process.env.NODE_ENV === 'development') {
+  studio.extend(extensionConfig)
   studio.initialize()
 }
 
@@ -24,6 +26,9 @@ export default function Page() {
           const renderer = new WebGPURenderer({
             canvas: st.canvas as HTMLCanvasElement,
           })
+          renderer.shadowMap.enabled = true
+          renderer.shadowMap.type = THREE.PCFSoftShadowMap
+
           if (!renderer._initialized) {
             await renderer.init()
           }
@@ -34,13 +39,10 @@ export default function Page() {
         {/*  */}
         <Suspense fallback={null}>
           <Environment files={[`/hdr/brown_photostudio_02_1k.hdr`]}></Environment>
+
           <Flying />
+
           <OrbitControls object-position={[0, 1.5, 2.5]}></OrbitControls>
-          {process.env.NODE_ENV === 'development' && (
-            <>
-              <Stats></Stats>
-            </>
-          )}
         </Suspense>
       </Canvas>
     </div>

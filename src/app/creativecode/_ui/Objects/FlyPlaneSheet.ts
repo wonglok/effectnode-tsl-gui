@@ -1,3 +1,9 @@
-import { HomeProject } from '../Theatre/HomeProject/HomeProject'
+import { getHomeProject } from '../Theatre/HomeProject'
 
-export const FlyPlaneSheet = HomeProject.sheet('FlyPlaneSheet')
+export const FlyPlaneSheetName = 'FlyPlaneSheet'
+
+export const getFlyPlaneSheet = async () => {
+  let project = await getHomeProject()
+
+  return project.sheet(FlyPlaneSheetName)
+}

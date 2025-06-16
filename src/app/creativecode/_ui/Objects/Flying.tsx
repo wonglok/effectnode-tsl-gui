@@ -20,8 +20,9 @@ import {
 import * as THREE from 'three/webgpu'
 
 import { types } from '@theatre/core'
-import { FlyPlaneSheet } from './FlyPlaneSheet'
+// import { FlyPlaneSheet } from './FlyPlaneSheet'
 import { useVideoTexture } from '@react-three/drei'
+import { getFlyPlaneSheet } from './FlyPlaneSheet'
 
 export function Flying() {
   //
@@ -50,85 +51,90 @@ export function Flying() {
       side: THREE.DoubleSide,
     })
 
-    const xBand = sin(positionLocal.x.mul(Unis.frequencyX).sub(time)).mul(0.1)
-    const yBand = sin(positionLocal.y.mul(Unis.frequencyY).sub(time)).mul(0.1)
+    const xBand = sin(uv().x.mul(Unis.frequencyX).sub(time)).mul(0.1)
+    const yBand = sin(uv().y.mul(Unis.frequencyY).sub(time)).mul(0.1)
+
     const elevation = xBand.add(yBand).mul(Unis.size)
 
     phyMat.positionNode = positionLocal.add(vec3(0, 0, elevation))
-    phyMat.normalNode = vec3(vec4(positionLocal.add(vec3(0, 0, elevation)), 1.0)).normalize()
+    phyMat.normalNode = positionLocal.add(vec3(0, 0, elevation)).normalize().mul(modelViewMatrix)
 
     tex.mapping = THREE.EquirectangularReflectionMapping
 
     const col = convertColorSpace(texture(tex), THREE.LinearSRGBColorSpace, THREE.SRGBColorSpace)
-    const texColor = col.mul(
-      mix(
-        Unis.color1,
-        Unis.color2,
-        //
-        sin(elevation).mul(cos(elevation)),
-      ),
-    )
 
-    //
-    phyMat.colorNode = texColor
-
-    // phyMat.node =
+    phyMat.colorNode = col
 
     return { material: phyMat }
   }, [])
 
   useEffect(() => {
-    let box1 = FlyPlaneSheet.object(
-      'flying1',
-      {
-        // position: { x: 0, y: 0, z: 0 },
-        // rotation: { x: 0, y: 0, z: 0 },
-        // scale: { x: 1, y: 1, z: 1 },
+    let clean = () => {}
+
+    getFlyPlaneSheet().then((sheet) => {
+      let box1 = sheet.object(
+        'flying1',
+        {
+          // position: { x: 0, y: 0, z: 0 },
+          // rotation: { x: 0, y: 0, z: 0 },
+          // scale: { x: 1, y: 1, z: 1 },
+          //
+          colorA: types.rgba({ ...new THREE.Color('#ff0000'), a: 1 }, {}),
+          colorB: types.rgba({ ...new THREE.Color('#0000ff'), a: 1 }, {}),
+          frequencyX: 10,
+          frequencyY: 10,
+          //
+          //
+          metalness: types.number(0, {
+            range: [0, 1],
+          }),
+          roughness: types.number(0, {
+            range: [0, 1],
+          }),
+          size: types.number(1, {
+            range: [0, 5],
+          }),
+        },
+        {
+          reconfigure: true,
+        },
+      )
+
+      clean = box1.onValuesChange((values) => {
         //
-        colorA: types.rgba({ ...new THREE.Color('#ff0000'), a: 1 }, {}),
-        colorB: types.rgba({ ...new THREE.Color('#0000ff'), a: 1 }, {}),
-        frequencyX: 10,
-        frequencyY: 10,
+
+        Unis.frequencyX.value = values.frequencyX
+        Unis.frequencyY.value = values.frequencyY
+
+        Unis.color1.value.setRGB(values.colorA.r, values.colorA.g, values.colorA.b)
+        Unis.color2.value.setRGB(values.colorB.r, values.colorB.g, values.colorB.b)
+
+        Unis.size.value = values.size
+
+        material.metalness = values.metalness
+        material.roughness = values.roughness
+
         //
-        //
-        metalness: types.number(0, {
-          range: [0, 1],
-        }),
-        roughness: types.number(0, {
-          range: [0, 1],
-        }),
-        size: types.number(1, {
-          range: [0, 5],
-        }),
-      },
-      {
-        reconfigure: true,
-      },
-    )
-
-    //
-
-    return box1.onValuesChange((values) => {
-      //
-
-      Unis.frequencyX.value = values.frequencyX
-      Unis.frequencyY.value = values.frequencyY
-
-      Unis.color1.value.setRGB(values.colorA.r, values.colorA.g, values.colorA.b)
-      Unis.color2.value.setRGB(values.colorB.r, values.colorB.g, values.colorB.b)
-
-      Unis.size.value = values.size
-
-      material.metalness = values.metalness
-      material.roughness = values.roughness
-
-      //
+      })
     })
+
+    return () => {
+      clean()
+    }
   }, [Unis])
 
+  let t3 = useMemo(() => {
+    return new THREE.Object3D()
+  }, [])
+
+  useFrame(() => {
+    t3.position.set(0, 0, 0)
+  })
   return (
     <>
-      <mesh material={material} scale={[aspect, 1, 1]} rotation={[-0.5 * Math.PI, 0, 0]}>
+      <directionalLight target={t3} castShadow position={[5, 5, 5]}></directionalLight>
+
+      <mesh castShadow receiveShadow material={material} scale={[aspect, 1, 1]} rotation={[-0.5 * Math.PI, 0, 0]}>
         <planeGeometry args={[2, 2, Math.floor(256 * aspect), 256]} />
       </mesh>
     </>
