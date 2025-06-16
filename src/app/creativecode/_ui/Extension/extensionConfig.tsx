@@ -36,17 +36,20 @@ const saveState = async () => {
 }
 
 const EffectNodeUI = () => {
-  return (
-    <div className='w-full h-full bg-red-500'>
-      <div onClick={() => {}}>Save Button</div>
-    </div>
-  )
+  //
+
+  console.log('EffectNodeUI')
+
+  //
+  return <div className='w-full h-full bg-red-500'>EffectNodeUI</div>
 }
 
 const Pane: PaneClassDefinition = {
   class: 'effectnode',
   mount: ({ paneId, node }) => {
     //
+
+    console.log(paneId)
 
     let root = createRoot(node)
 
@@ -74,14 +77,14 @@ export const extensionConfig: IExtension = {
   toolbars: {
     global(set, studio) {
       set([
-        {
-          type: 'Icon',
-          title: 'EffectNode Pane',
-          svgSource: '✨',
-          onClick: () => {
-            studio.createPane('effectnode')
-          },
-        },
+        // {
+        //   type: 'Icon',
+        //   title: 'EffectNode Pane',
+        //   svgSource: '✨',
+        //   onClick: () => {
+        //     studio.createPane('effectnode')
+        //   },
+        // },
         {
           type: 'Icon',
           title: 'Save State',
@@ -202,19 +205,22 @@ async function initDirectManipulationObject(name: string, icon: string) {
       })
     }
   })
+
   document.addEventListener('mouseup', (e) => {
     currentScrub.commit()
     currentScrub = studio.scrub()
     isDragging = false
   })
+
   studio.onSelectionChange((newSelecton: (ISheet | ISheetObject<any>)[]) => {
     div.style.background = 'transparent'
     if (newSelecton.includes(obj)) div.style.background = 'orange'
   })
+  //
 }
 
-if (typeof document !== 'undefined') {
-  initDirectManipulationObject('🥚 obj', '🥚')
-  initDirectManipulationObject('🐣 obj', '🐣')
-  initDirectManipulationObject('🐥 obj', '🐥')
-}
+// if (typeof document !== 'undefined') {
+//   initDirectManipulationObject('🥚 obj', '🥚')
+//   initDirectManipulationObject('🐣 obj', '🐣')
+//   initDirectManipulationObject('🐥 obj', '🐥')
+// }
