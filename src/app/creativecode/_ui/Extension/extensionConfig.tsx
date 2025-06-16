@@ -91,9 +91,9 @@ export const extensionConfig: IExtension = {
     global(set, studio) {
       //
 
-      studio.onSelectionChange((items) => {
-        console.log(items)
-      })
+      // studio.onSelectionChange(() => {
+      //   saveState()
+      // })
 
       //
       set([
