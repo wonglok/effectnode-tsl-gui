@@ -84,11 +84,18 @@ const Pane: PaneClassDefinition = {
     }
   },
 }
-
+//studio
 export const extensionConfig: IExtension = {
   id: 'hello-world-extension',
   toolbars: {
     global(set, studio) {
+      //
+
+      studio.onSelectionChange((items) => {
+        console.log(items)
+      })
+
+      //
       set([
         // {
         //   type: 'Icon',
