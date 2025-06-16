@@ -18,7 +18,6 @@ app.use(json({}))
 //     multiples: true, // req.files to be arrays of files
 // }));
 
-
 app.get('/', (req, res) => {
     res.send('Hello World')
 })
@@ -33,10 +32,10 @@ app.post('/states', async (req, res) => {
         let writeCurrentPath = `${join(import.meta.dirname, '../public/states/', 'current', 'state.json')}`
 
         // console.log(writeCurrentPath)
-        
+
         await writeToFile(writeCurrentPath, writeString)
 
-        let writeTSPath = `${join(import.meta.dirname, '../public/states/', 'archive', `${moment(new Date()).format('YYYY-MM-DD')}`, `state-${moment().format('LT').replace(/\:/g,'_').replace(' ', '_')}.json`)}`
+        let writeTSPath = `${join(import.meta.dirname, '../public/states/', 'archive', `${moment(new Date()).format('YYYY-MM-DD')}`, `state-${moment().format('LT').replace(/\:/g, '_').replace(' ', '_')}.json`)}`
 
         // console.log(writeTSPath)
 
@@ -81,6 +80,5 @@ app.listen(2329, () => {
 //             })
 //         })
 //         .then(() => {
-          
 //         })
 // })
