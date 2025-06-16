@@ -107,7 +107,7 @@ export const extensionConfig: IExtension = {
         {
           type: 'Icon',
           title: 'Save State',
-          svgSource: '💽',
+          svgSource: '💾',
           onClick: () => {
             saveState()
           },
