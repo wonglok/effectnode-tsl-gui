@@ -15,8 +15,8 @@
 						"metalness": 0.4936708860759493,
 						"colorA": {
 							"r": 1,
-							"g": 0.8196078431372549,
-							"b": 0.8196078431372549,
+							"g": 0.396078431372549,
+							"b": 0.396078431372549,
 							"a": 1
 						},
 						"colorB": {
@@ -40,7 +40,6 @@
 	},
 	"definitionVersion": "0.4.0",
 	"revisionHistory": [
-		"_m4qZ-7hXaQGDpJ0",
 		"W7jl0wmbnC143kB3",
 		"4-K2w9fz0Sm13JXs",
 		"LAUj4IFjNXgWEIcO",
@@ -89,6 +88,7 @@
 		"0wHeuiEvekaNOYZX",
 		"XjQn2xGLY2Efq9Xz",
 		"piuNf9YncBQ9BoEe",
-		"tYUn2nP5jDh3hV-C"
+		"tYUn2nP5jDh3hV-C",
+		"DqZpvw4KAm6q0Csd"
 	]
 }

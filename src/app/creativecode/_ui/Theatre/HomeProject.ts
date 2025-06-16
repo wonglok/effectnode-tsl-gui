@@ -14,7 +14,7 @@ export const getHomeProject = async () => {
     config.state = await import('../../../../../public/states/current/state.json').then((r) => r.default)
   }
 
-  const project = getProject(HomeProjectName, config)
+  const project = await getProject(HomeProjectName, config)
 
   return project
 }

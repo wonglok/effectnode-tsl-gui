@@ -63,13 +63,13 @@ export function Flying() {
 
     const col = convertColorSpace(texture(tex), THREE.LinearSRGBColorSpace, THREE.SRGBColorSpace)
 
-    phyMat.colorNode = col
+    phyMat.colorNode = col.mul(Unis.color1).mul(Unis.color2)
 
     return { material: phyMat }
   }, [])
 
   useEffect(() => {
-    let clean = () => {}
+    let cleans: any[] = []
 
     getFlyPlaneSheet().then((sheet) => {
       let box1 = sheet.object(
@@ -100,26 +100,32 @@ export function Flying() {
         },
       )
 
-      clean = box1.onValuesChange((values) => {
-        //
+      cleans.push(
+        box1.onValuesChange((values) => {
+          //
 
-        Unis.frequencyX.value = values.frequencyX
-        Unis.frequencyY.value = values.frequencyY
+          Unis.frequencyX.value = values.frequencyX
+          Unis.frequencyY.value = values.frequencyY
 
-        Unis.color1.value.setRGB(values.colorA.r, values.colorA.g, values.colorA.b)
-        Unis.color2.value.setRGB(values.colorB.r, values.colorB.g, values.colorB.b)
+          Unis.color1.value.setRGB(values.colorA.r, values.colorA.g, values.colorA.b)
+          Unis.color2.value.setRGB(values.colorB.r, values.colorB.g, values.colorB.b)
 
-        Unis.size.value = values.size
+          Unis.size.value = values.size
 
-        material.metalness = values.metalness
-        material.roughness = values.roughness
+          material.metalness = values.metalness
+          material.roughness = values.roughness
 
-        //
-      })
+          //
+        }),
+      )
+
+      //
     })
 
     return () => {
-      clean()
+      cleans.forEach((t) => {
+        t()
+      })
     }
   }, [Unis])
 
