@@ -23,18 +23,24 @@ importers:
       '@theatre/studio':
         specifier: ~0.5.1
         version: 0.5.1(@theatre/core@0.5.1)
+      '@types/body-parser':
+        specifier: ^1.19.6
+        version: 1.19.6
+      '@types/connect':
+        specifier: ^3.4.38
+        version: 3.4.38
       '@types/express':
         specifier: ^5.0.3
         version: 5.0.3
       '@types/three':
         specifier: ^0.177.0
         version: 0.177.0
+      body-parser:
+        specifier: ^2.2.0
+        version: 2.2.0
       express:
         specifier: ^5.1.0
         version: 5.1.0
-      express-formidable:
-        specifier: ^1.2.0
-        version: 1.2.0
       killport:
         specifier: ^1.0.2
         version: 1.0.2
@@ -1279,10 +1285,6 @@ packages:
     resolution: {integrity: sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==}
     engines: {node: '>= 0.6'}
 
-  express-formidable@1.2.0:
-    resolution: {integrity: sha512-w1vXjF3gb50UKTNkFaW8/4rqY4dUrKfZ1sAZzwAF9YxCAgj/29QZsycf71di0GkskrZOAkubk9pvGYfxyAMYiw==}
-    engines: {node: '>= 8'}
-
   express@5.1.0:
     resolution: {integrity: sha512-DT9ck5YIRU+8GYzzU5kT3eHGA5iL+1Zd0EutOmTE9Dtk+Tvuzd23VBU+ec7HPNSTxXYO55gPV/hq4pSBJDjFpA==}
     engines: {node: '>= 18'}
@@ -1347,10 +1349,6 @@ packages:
   for-each@0.3.5:
     resolution: {integrity: sha512-dKx12eRCVIzqCxFGplyFKJMPvLEWgmNtUrpTiJIR5u97zEhRG8ySrtboPHZXx7daLxQVrl643cTzbab2tkQjxg==}
     engines: {node: '>= 0.4'}
-
-  formidable@1.2.6:
-    resolution: {integrity: sha512-KcpbcpuLNOwrEjnbpMC0gS+X8ciDoZE1kkqzat4a8vrprf+s9pKNQ/QIwWfbfs4ltgmFl3MD177SNTkve3BwGQ==}
-    deprecated: 'Please upgrade to latest, formidable@v2 or formidable@v3! Check these notes: https://bit.ly/2ZEqIau'
 
   forwarded@0.2.0:
     resolution: {integrity: sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==}
@@ -3847,10 +3845,6 @@ snapshots:
 
   etag@1.8.1: {}
 
-  express-formidable@1.2.0:
-    dependencies:
-      formidable: 1.2.6
-
   express@5.1.0:
     dependencies:
       accepts: 2.0.0
@@ -3951,8 +3945,6 @@ snapshots:
   for-each@0.3.5:
     dependencies:
       is-callable: 1.2.7
-
-  formidable@1.2.6: {}
 
   forwarded@0.2.0: {}
 
