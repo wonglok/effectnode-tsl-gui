@@ -36,7 +36,7 @@ app.post('/states', async (req, res) => {
         
         await writeToFile(writeCurrentPath, writeString)
 
-        let writeTSPath = `${join(import.meta.dirname, '../public/states/', 'archive', `${moment(new Date()).format('YYYY-mm-DD')}-${new Date().getTime()}`, 'state.json')}`
+        let writeTSPath = `${join(import.meta.dirname, '../public/states/', 'archive', `${moment(new Date()).format('YYYY-MM-DD')}`, `state-${moment().format('LT').replace(/\:/g,'_').replace(' ', '_')}.json`)}`
 
         // console.log(writeTSPath)
 
