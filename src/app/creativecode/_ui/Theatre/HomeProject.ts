@@ -1,4 +1,6 @@
 import { getProject } from '@theatre/core'
+import { ISheet } from '@theatre/core'
+import { useEffect, useState } from 'react'
 
 export const HomeProjectName = 'HomeProject'
 
@@ -18,4 +20,16 @@ export const getHomeProject = async () => {
   const project = getProject(HomeProjectName, config)
 
   return project
+}
+
+export const useSheetHome = (name: string): ISheet | false => {
+  let [sheet, setSheet] = useState<ISheet | false>(false)
+
+  useEffect(() => {
+    getHomeProject().then((project) => {
+      setSheet(project.sheet(name))
+    })
+  }, [])
+
+  return sheet
 }

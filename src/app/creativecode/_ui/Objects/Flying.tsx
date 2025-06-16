@@ -23,7 +23,8 @@ import * as THREE from 'three/webgpu'
 import { ISheet, types } from '@theatre/core'
 // import { FlyPlaneSheet } from './FlyPlaneSheet'
 import { useVideoTexture } from '@react-three/drei'
-import { FlyPlaneSheetName, useSheetHome } from './FlyPlaneSheet'
+import { FlyPlaneSheetName } from './FlyPlaneSheet'
+import { useSheetHome } from '../Theatre/HomeProject'
 
 export function Flying() {
   let beach = `${location.origin}/video/sand.mp4`
