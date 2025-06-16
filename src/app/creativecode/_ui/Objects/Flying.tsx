@@ -23,8 +23,9 @@ import * as THREE from 'three/webgpu'
 import { ISheet, types } from '@theatre/core'
 // import { FlyPlaneSheet } from './FlyPlaneSheet'
 import { useVideoTexture } from '@react-three/drei'
-import { FlyPlaneSheetName } from './FlyPlaneSheet'
 import { useSheetHome } from '../Theatre/HomeProject'
+
+export const FlyPlaneSheetName = 'FlyPlaneSheet'
 
 export function Flying() {
   let beach = `${location.origin}/video/sand.mp4`
@@ -57,6 +58,7 @@ export function Flying() {
     const elevation = xBand.add(yBand).mul(Unis.size)
 
     phyMat.positionNode = positionLocal.add(vec3(0, 0, elevation))
+    phyMat.normalNode = positionLocal.add(vec3(0, 0, elevation)).normalize()
 
     tex.mapping = THREE.EquirectangularReflectionMapping
 
