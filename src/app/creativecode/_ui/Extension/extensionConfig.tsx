@@ -16,7 +16,7 @@ const dataConfig = {
 
 const saveState = async () => {
   const json = studio.createContentOfSaveFile(HomeProjectName)
-  console.log(json)
+  console.log('autosave::', json)
   await fetch(`http://localhost:2329/states`, {
     mode: 'cors',
     method: 'POST',
@@ -33,6 +33,19 @@ const saveState = async () => {
     .catch((r) => {
       console.log(r)
     })
+}
+
+declare global {
+  interface Window {
+    autoSaveTimer?: ReturnType<typeof setTimeout>
+  }
+}
+
+if (typeof window !== 'undefined') {
+  clearTimeout(window.autoSaveTimer)
+  window.autoSaveTimer = setTimeout(() => {
+    saveState()
+  }, 60 * 1000 * 5)
 }
 
 const EffectNodeUI = () => {
