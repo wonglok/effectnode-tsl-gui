@@ -23,8 +23,7 @@ import * as THREE from 'three/webgpu'
 import { ISheet, types } from '@theatre/core'
 // import { FlyPlaneSheet } from './FlyPlaneSheet'
 import { useVideoTexture } from '@react-three/drei'
-import { getFlyPlaneSheet, useSheetHome } from './FlyPlaneSheet'
-import useSWR from 'swr'
+import { FlyPlaneSheetName, useSheetHome } from './FlyPlaneSheet'
 
 export function Flying() {
   let beach = `${location.origin}/video/sand.mp4`
@@ -67,7 +66,7 @@ export function Flying() {
     return { material: phyMat }
   }, [])
 
-  let sheet = useSheetHome()
+  let sheet = useSheetHome(FlyPlaneSheetName)
   useEffect(() => {
     if (!sheet) {
       return

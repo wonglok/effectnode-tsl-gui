@@ -4,18 +4,12 @@ import { useEffect, useState } from 'react'
 
 export const FlyPlaneSheetName = 'FlyPlaneSheet'
 
-export const getFlyPlaneSheet = async () => {
-  let project = await getHomeProject()
-
-  return project.sheet(FlyPlaneSheetName)
-}
-
-export const useSheetHome = (): ISheet | false => {
+export const useSheetHome = (name: string): ISheet | false => {
   let [sheet, setSheet] = useState<ISheet | false>(false)
 
   useEffect(() => {
-    getFlyPlaneSheet().then((sh) => {
-      setSheet(sh)
+    getHomeProject().then((project) => {
+      setSheet(project.sheet(name))
     })
   }, [])
 
