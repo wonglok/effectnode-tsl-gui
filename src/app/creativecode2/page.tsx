@@ -13,7 +13,7 @@ export default function Page() {
       <div className='w-full h-full'>
         <O3D>
           <Suspense fallback={null}>
-            <Environment files={[`/hdr/brown_photostudio_02_1k.hdr`]}></Environment>
+            <Environment files={[`/hdr/brown_photostudio_02_1k.hdr`]} background></Environment>
 
             <Flying />
             <OrbitControls object-position={[0, 1.5, 2.5]}></OrbitControls>
