@@ -23,7 +23,7 @@ import * as THREE from 'three/webgpu'
 import { ISheet, types } from '@theatre/core'
 // import { FlyPlaneSheet } from './FlyPlaneSheet'
 import { useVideoTexture } from '@react-three/drei'
-import { useSheetHome } from '../../../../_threejs/ProjectHome/HomeProject'
+import { useSheetData } from '../../../../_threejs/ProjectHome/HomeProject'
 
 export const FlyPlaneSheetName = 'FlyPlaneSheet'
 
@@ -69,7 +69,7 @@ export function Flying() {
     return { material: phyMat }
   }, [])
 
-  let sheet = useSheetHome(FlyPlaneSheetName)
+  let sheet = useSheetData(FlyPlaneSheetName)
   useEffect(() => {
     if (!sheet) {
       return

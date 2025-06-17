@@ -22,7 +22,7 @@ export const getHomeProject = async () => {
   return project
 }
 
-export const useSheetHome = (name: string): ISheet | false => {
+export const useSheetData = (name: string): ISheet | false => {
   let [sheet, setSheet] = useState<ISheet | false>(false)
 
   useEffect(() => {
