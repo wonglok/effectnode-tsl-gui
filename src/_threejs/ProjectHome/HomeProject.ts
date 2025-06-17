@@ -13,7 +13,7 @@ export const getHomeProject = async () => {
     config.state = await fetch(`/states/current/state.json`).then((r) => r.json())
   } else {
     //
-    let data = require('../../../../../public/states/current/state.json')
+    let data = require('../../../public/states/current/state.json')
     config.state = data
   }
 

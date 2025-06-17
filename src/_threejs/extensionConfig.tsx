@@ -1,10 +1,10 @@
-import { ISheet } from '@theatre/core'
+// import { ISheet } from '@theatre/core'
 import studio, { IExtension } from '@theatre/studio'
 // import { types } from '@theatre/core'
 // import type { ISheetObject } from '@theatre/core'
 import type { PaneClassDefinition, ToolsetConfig } from '@theatre/studio'
 import { createRoot } from 'react-dom/client'
-import { HomeProjectName } from '../Theatre/HomeProject'
+import { HomeProjectName } from './ProjectHome/HomeProject'
 
 // const dataConfig = {
 //   exampleProp: types.stringLiteral('yes', {

@@ -30,6 +30,7 @@
     "react-dom": "^19.0.0",
     "swr": "^2.3.3",
     "three": "^0.177.0",
+    "tunnel-rat": "^0.1.2",
     "write-to-file": "^1.0.2"
   },
   "devDependencies": {
