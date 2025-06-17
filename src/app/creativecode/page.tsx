@@ -14,7 +14,7 @@ export default function Page() {
             <Box
               onClick={() => {
                 //
-                router.push('/creativecode2')
+                router.push('/blue')
               }}
             >
               <meshBasicMaterial color={'red'}></meshBasicMaterial>
