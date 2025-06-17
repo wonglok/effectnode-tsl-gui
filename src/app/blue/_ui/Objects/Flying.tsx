@@ -80,10 +80,6 @@ export function Flying() {
     let box1 = sheet.object(
       'flying1',
       {
-        // position: { x: 0, y: 0, z: 0 },
-        // rotation: { x: 0, y: 0, z: 0 },
-        // scale: { x: 1, y: 1, z: 1 },
-        //
         colorA: types.rgba({ ...new THREE.Color('#ff0000'), a: 1 }, {}),
         colorB: types.rgba({ ...new THREE.Color('#0000ff'), a: 1 }, {}),
         frequencyX: 10,
