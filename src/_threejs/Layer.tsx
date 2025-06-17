@@ -27,10 +27,9 @@ export function O3D({ children }: { children: any }) {
 }
 
 export function Layer({ children }: { children: any }) {
-  let ref = useRef<any>(undefined)
   return (
     <>
-      <div ref={ref} className='w-full h-full absolute top-0 left-0 '>
+      <div className='w-full h-full absolute top-0 left-0 '>
         <Canvas
           gl={async (st: any) => {
             const renderer = new WebGPURenderer({
@@ -45,7 +44,6 @@ export function Layer({ children }: { children: any }) {
 
             return renderer
           }}
-          eventSource={ref.current}
         >
           <t3d.Out></t3d.Out>
         </Canvas>
