@@ -17,11 +17,15 @@ export default function Page() {
           <Flying />
           <OrbitControls object-position={[0, 1.5, 2.5]}></OrbitControls>
 
-          <group>
+          <group scale={0.5}>
             <Box
               onClick={() => {
                 //
+
+                //
                 router.push('/creativecode')
+
+                //
               }}
             >
               <meshBasicMaterial color={'blue'}></meshBasicMaterial>
