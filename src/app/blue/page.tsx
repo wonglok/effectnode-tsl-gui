@@ -22,7 +22,6 @@ export default function Page() {
               onClick={() => {
                 //
 
-                //
                 router.push('/creativecode')
 
                 //
@@ -34,9 +33,13 @@ export default function Page() {
         </Suspense>
       </O3D>
 
-      <div className='w-full h-full'></div>
+      <div className='absolute top-0 left-0'>12312312</div>
     </>
   )
 }
+
+//
+
+//
 
 //

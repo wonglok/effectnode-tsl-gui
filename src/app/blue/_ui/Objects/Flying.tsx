@@ -152,8 +152,8 @@ export function Flying() {
             intensity={50}
           />
 
-          <mesh castShadow receiveShadow material={material} scale={[aspect, 1, 1]} rotation={[-0.5 * Math.PI, 0, 0]}>
-            <planeGeometry args={[2, 2, Math.floor(256 * aspect), 256]} />
+          <mesh castShadow receiveShadow material={material} scale={[1, 1, 1]} rotation={[-0.5 * Math.PI, 0, 0]}>
+            <circleGeometry args={[1, Math.floor(256 * aspect)]} />
           </mesh>
         </>
       )}
