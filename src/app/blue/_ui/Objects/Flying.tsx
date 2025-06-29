@@ -34,6 +34,8 @@ export function Flying() {
   let aspect = tex.image.videoWidth / tex.image.videoHeight
   //
 
+  //
+
   const Unis = useMemo(() => {
     return {
       //
@@ -48,6 +50,7 @@ export function Flying() {
 
   const { material } = useMemo(() => {
     //
+
     const phyMat = new THREE.MeshPhysicalNodeMaterial({
       side: THREE.DoubleSide,
     })
