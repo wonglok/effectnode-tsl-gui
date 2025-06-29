@@ -31,9 +31,9 @@ export function Flying() {
   let beach = `${location.origin}/video/sand.mp4`
 
   let tex = useVideoTexture(beach)
-  let aspect = tex.image.videoWidth / tex.image.videoHeight
   //
 
+  let aspect = tex.image.videoWidth / tex.image.videoHeight
   //
 
   const Unis = useMemo(() => {
@@ -67,7 +67,7 @@ export function Flying() {
 
     const col = convertColorSpace(texture(tex), THREE.LinearSRGBColorSpace, THREE.SRGBColorSpace)
 
-    phyMat.colorNode = mix(Unis.color1, Unis.color2, elevation)
+    phyMat.colorNode = mix(Unis.color1, Unis.color2, elevation).mul(col)
 
     return { material: phyMat }
   }, [])
