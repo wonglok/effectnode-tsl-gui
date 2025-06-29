@@ -20,7 +20,7 @@ import {
 } from 'three/tsl'
 import * as THREE from 'three/webgpu'
 
-import { ISheet, types } from '@theatre/core'
+import { types } from '@theatre/core'
 // import { FlyPlaneSheet } from './FlyPlaneSheet'
 import { useVideoTexture } from '@react-three/drei'
 import { useSheetData } from '../../../../_threejs/ProjectHome/HomeProject'
