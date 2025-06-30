@@ -15,9 +15,10 @@ export default function Page() {
           <Environment files={[`/hdr/brown_photostudio_02_1k.hdr`]} background></Environment>
 
           <Flying />
+
           <OrbitControls object-position={[0, 1.5, 2.5]}></OrbitControls>
 
-          <group scale={0.5}>
+          <group scale={0.25}>
             <Box
               onClick={() => {
                 //
@@ -33,7 +34,7 @@ export default function Page() {
         </Suspense>
       </O3D>
 
-      <div className='absolute top-0 left-0'>12312312</div>
+      <div className='absolute top-0 left-0'>Happy</div>
     </>
   )
 }

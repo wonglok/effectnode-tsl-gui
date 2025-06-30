@@ -35,6 +35,8 @@ export function Layer({ children }: { children: any }) {
             const renderer = new WebGPURenderer({
               canvas: st.canvas as HTMLCanvasElement,
             })
+
+            //
             renderer.shadowMap.enabled = true
             renderer.shadowMap.type = THREE.PCFSoftShadowMap
 

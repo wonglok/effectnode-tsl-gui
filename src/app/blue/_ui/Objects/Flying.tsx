@@ -29,6 +29,7 @@ export const FlyPlaneSheetName = 'FlyPlaneSheet'
 
 export function Flying() {
   let beach = `${location.origin}/video/sand.mp4`
+  //
 
   let tex = useVideoTexture(beach)
   //
@@ -47,6 +48,8 @@ export function Flying() {
       frequencyY: uniform(10),
     }
   }, [])
+
+  //
 
   const { material } = useMemo(() => {
     //
@@ -139,6 +142,9 @@ export function Flying() {
   useFrame(() => {
     t3.position.set(0, 0, 0)
   })
+
+  //
+
   return (
     <>
       {/* <directionalLight target={t3} castShadow position={[5, 5, 5]}></directionalLight> */}

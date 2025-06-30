@@ -21,6 +21,8 @@ export default function Page() {
           <OrbitControls object-position={[0, 1.5, 2.5]}></OrbitControls>
         </group>
       </O3D>
+
+      <div className='absolute top-0 left-0'>Creative Code</div>
     </>
   )
 }

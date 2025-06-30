@@ -2,7 +2,7 @@ import { getProject } from '@theatre/core'
 import { ISheet } from '@theatre/core'
 import { useEffect, useState } from 'react'
 
-export const HomeProjectName = 'HomeProject'
+export const ProjectName = 'HomeProject'
 
 export const getHomeProject = async () => {
   const config: any = {
@@ -17,7 +17,7 @@ export const getHomeProject = async () => {
     config.state = data
   }
 
-  const project = getProject(HomeProjectName, config)
+  const project = getProject(ProjectName, config)
 
   return project
 }

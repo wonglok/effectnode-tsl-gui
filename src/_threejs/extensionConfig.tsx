@@ -4,7 +4,7 @@ import studio, { IExtension } from '@theatre/studio'
 // import type { ISheetObject } from '@theatre/core'
 import type { PaneClassDefinition, ToolsetConfig } from '@theatre/studio'
 import { createRoot } from 'react-dom/client'
-import { HomeProjectName } from './ProjectHome/HomeProject'
+import { ProjectName } from './ProjectHome/HomeProject'
 
 // const dataConfig = {
 //   exampleProp: types.stringLiteral('yes', {
@@ -14,7 +14,7 @@ import { HomeProjectName } from './ProjectHome/HomeProject'
 // }
 
 const saveState = async () => {
-  const json = studio.createContentOfSaveFile(HomeProjectName)
+  const json = studio.createContentOfSaveFile(ProjectName)
   console.log('save::', json)
   await fetch(`http://localhost:2329/states`, {
     mode: 'cors',
