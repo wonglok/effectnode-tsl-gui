@@ -1,0 +1,94 @@
+{
+	"sheetsById": {
+		"FlyPlaneSheet": {
+			"staticOverrides": {
+				"byObject": {
+					"flying1": {
+						"color": {
+							"r": 1,
+							"g": 0.13333333333333333,
+							"b": 0.13333333333333333,
+							"a": 1
+						},
+						"frequencyX": 50,
+						"frequencyY": 50,
+						"metalness": 0.12025316455696183,
+						"colorA": {
+							"r": 0,
+							"g": 1,
+							"b": 0.7019607843137254,
+							"a": 1
+						},
+						"colorB": {
+							"r": 1,
+							"g": 0,
+							"b": 0,
+							"a": 1
+						},
+						"size": 0.8860759493670887,
+						"scale": {
+							"y": 1
+						},
+						"roughness": 0.5886075949367086
+					},
+					"🐥 obj": {
+						"x": 25
+					}
+				}
+			}
+		}
+	},
+	"definitionVersion": "0.4.0",
+	"revisionHistory": [
+		"zfpLARLNYFBn18Bc",
+		"ADp1WkwDTPtMze47",
+		"ZzikM16wzKdvQKEi",
+		"OHWb0MxDBp0Pfwlm",
+		"38YFsHa1xaIVOsBp",
+		"pOdvJtdmlH8cRvlk",
+		"Vm3axutmidJ4rtp8",
+		"P2Eb03w3jG1Dq51M",
+		"uaKub0yyCoyWJbto",
+		"ik_RGNuXjh3EW0CT",
+		"frNNOVy9I8a89Z-7",
+		"yZeiYqua8iKU9aEn",
+		"1jtf995WOkgfQZvH",
+		"H_sf1wiDUQ6ffMtA",
+		"FVdiiURpiQMxnGrF",
+		"k0GeOeb4JMcl0GPu",
+		"FaCtVGvErgFHnpBK",
+		"SqItrMkBa9NDyv0l",
+		"bvnVFFxdQD7k30R_",
+		"TxaqGEEnaY0B3IJO",
+		"1ZsXVaXrYJbHjjnG",
+		"yiKyN4UEW_oz3HD3",
+		"UbEXeBovfX4-CcIc",
+		"7HhF5FbOgyZ1cul4",
+		"HlUbeWhf03LqzWlC",
+		"pLB1ktBY-o_JueOB",
+		"6BUClovfUciLrbSf",
+		"QhbEVUxSB2OsVWit",
+		"skN_Pp5heql4n1sk",
+		"d8Yc_3qgV9kY_B90",
+		"Qo634dPHhLWBRlyW",
+		"H1xlf4RcozLOySoD",
+		"UXpGeCq9c6TGUSGU",
+		"OVU1waK96WctD1T-",
+		"Vtv_baHkhcu_u7QH",
+		"vwN5BXUS1LWR3ijB",
+		"j_NrOUE60Ro_gEU9",
+		"2NTjC5zBcoVaRyvb",
+		"mAHYZo77eLUdV4CZ",
+		"uU5uk8iQPvjHYHjR",
+		"sm2FKz4jxGQGn3qw",
+		"3z6HMUAO3mr1tXVh",
+		"4hH-AbT9nlysy53v",
+		"yWjCTMgz4IW1QMJ8",
+		"8gUCU4oyuaoBrph8",
+		"UPWFSoTuALa37AS-",
+		"exDuKZdnm0FF08W0",
+		"z__-n0YnYWgUau0W",
+		"rnsCxabISoUxrHPh",
+		"BaWSpKiDoXDVx38M"
+	]
+}
